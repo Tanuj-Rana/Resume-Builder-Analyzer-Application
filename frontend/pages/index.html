@@ -29,12 +29,16 @@
         }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <!-- UPDATED: Added weights 700, 800, and 900 to the Inter font so it can render thicker text -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 </head>
 
-<body class="bg-white dark:bg-[#0B0B14] text-[#0B0B14] dark:text-white transition-colors duration-300">
+<!-- ADDED: overflow-x-hidden to prevent side-scrolling on mobile -->
+
+<body
+    class="bg-white dark:bg-[#0B0B14] text-[#0B0B14] dark:text-white transition-colors duration-300 relative overflow-x-hidden w-full">
 
     <!-- top accent bar -->
     <div class="h-2 w-full bg-[#0B0B14] dark:bg-black"></div>
@@ -42,19 +46,21 @@
     <!-- NAVBAR -->
     <header
         class="sticky top-0 z-50 bg-white/90 dark:bg-[#0B0B14]/90 backdrop-blur border-b border-gray-100 dark:border-white/10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <!-- Navy Blue Logo with Green shadow -->
+        <!-- Adjusted padding for mobile (px-4) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between relative">
+            <a href="#" class="flex items-center gap-2 sm:gap-3 shrink-0">
                 <span
-                    class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold text-xl font-['Inter'] shadow-lg shadow-brand-green/30">R</span>
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold text-lg sm:text-xl font-['Inter'] shadow-lg shadow-brand-green/30">R</span>
                 <span class="leading-tight font-['Inter']">
                     <span
-                        class="block font-extrabold text-xl tracking-tight text-gray-900 dark:text-white">ResumeAI</span>
-                    <span class="block text-[10px] font-bold tracking-[0.15em] text-gray-500 dark:text-gray-400">BUILDER
+                        class="block font-extrabold text-[17px] sm:text-xl tracking-tight text-gray-900 dark:text-white">ResumeAI</span>
+                    <span
+                        class="block text-[8px] sm:text-[10px] font-bold tracking-[0.15em] text-gray-500 dark:text-gray-400">BUILDER
                         &amp; ANALYZER</span>
                 </span>
             </a>
-            
+
+            <!-- Desktop Navigation -->
             <nav
                 class="hidden md:flex items-center gap-9 text-gray-600 dark:text-gray-300 text-[15px] font-medium font-inter">
                 <a href="#features" class="hover:text-brand-green transition-colors">Features</a>
@@ -63,10 +69,10 @@
                 <a href="#pricing" class="hover:text-brand-green transition-colors">Pricing</a>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <!-- Theme Toggle Button -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Theme Toggle Button - ADDED: shrink-0 so it stays perfectly round -->
                 <button id="themeToggle" aria-label="Toggle dark mode"
-                    class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    class="shrink-0 w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                     <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -79,15 +85,50 @@
                     </svg>
                 </button>
 
-                <!-- Sign In Button -->
+                <!-- Sign In Button (Hidden on strict mobile, shown on tablet/desktop) -->
                 <a href="register.html"
-                    class="hidden sm:inline-flex items-center px-4 h-9 rounded-full border border-gray-200 dark:border-white/15 font-semibold text-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-colors font-['Inter']">Sign
+                    class="hidden sm:inline-flex items-center px-4 h-9 rounded-full border border-gray-200 dark:border-white/15 font-semibold text-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-colors font-['Inter'] whitespace-nowrap">Sign
                     In</a>
 
-                <!-- Get Started Free Button - Green Accent -->
+                <!-- Get Started Free Button - ADDED: hidden sm:inline-flex so it doesn't break mobile layout -->
                 <a href="register.html"
-                    class="inline-flex items-center px-4 h-9 rounded-full bg-brand-green text-white font-semibold text-sm hover:bg-brand-green-dark transition-colors shadow-md shadow-brand-green/30 font-['Inter']">Get
+                    class="hidden sm:inline-flex shrink-0 items-center px-4 h-9 rounded-full bg-brand-green text-white font-semibold text-sm hover:bg-brand-green-dark transition-colors shadow-md shadow-brand-green/30 font-['Inter'] whitespace-nowrap">Get
                     Started Free</a>
+
+                <!-- Hamburger Menu Button (Mobile Only) - ADDED: shrink-0 -->
+                <button id="mobileMenuBtn" aria-label="Toggle mobile menu"
+                    class="md:hidden shrink-0 flex items-center justify-center w-9 h-9 text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu"
+            class="hidden md:hidden absolute top-full left-0 w-full bg-white dark:bg-[#0B0B14] border-b border-gray-100 dark:border-white/10 shadow-xl origin-top z-50">
+            <div
+                class="px-5 py-6 flex flex-col gap-4 font-['Inter'] text-[15px] font-medium text-gray-600 dark:text-gray-300">
+                <a href="#features" class="mobile-link hover:text-brand-green transition-colors py-1">Features</a>
+                <a href="#how-it-works" class="mobile-link hover:text-brand-green transition-colors py-1">How it
+                    Works</a>
+                <a href="#testimonials"
+                    class="mobile-link hover:text-brand-green transition-colors py-1">Testimonials</a>
+                <a href="#pricing" class="mobile-link hover:text-brand-green transition-colors py-1">Pricing</a>
+
+                <div class="h-px w-full bg-gray-100 dark:bg-white/10 my-2 sm:hidden"></div>
+
+                <!-- Mobile Auth Buttons: Since we hid them in the top bar, they are beautifully stacked here -->
+                <div class="flex flex-col gap-3 sm:hidden mt-2">
+                    <a href="register.html"
+                        class="mobile-link w-full py-3.5 rounded-xl bg-brand-green text-white text-center font-bold text-[15px] hover:bg-brand-green-dark transition-colors shadow-sm">Get
+                        Started Free</a>
+                    <a href="register.html"
+                        class="mobile-link w-full py-3.5 rounded-xl border border-gray-200 dark:border-white/15 text-gray-900 dark:text-white text-center font-bold text-[15px] hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">Sign
+                        In</a>
+                </div>
             </div>
         </div>
     </header>
@@ -95,99 +136,107 @@
     <!-- HERO -->
     <section
         class="relative overflow-hidden hero-glow bg-gradient-to-b from-[#F4F3FF] to-white dark:from-[#0B0F19] dark:to-[#0B0B14]">
-        <div class="max-w-7xl mx-auto px-6 pt-20 pb-16">
-            
+        <div class="max-w-7xl mx-auto px-6 pt-16 sm:pt-20 pb-16">
+
             <div class="lg:flex lg:items-center lg:justify-between text-center lg:text-left">
                 <!-- Left Side: Headline & Text -->
                 <div class="lg:w-[55%] relative isolate">
                     <a href="#"
-                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 text-brand dark:text-brand-light text-[13px] font-medium font-['Inter'] shadow-sm mb-8 hover:bg-brand/10 dark:hover:bg-brand/30 transition-colors backdrop-blur-sm">
-
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 text-brand dark:text-brand-light text-[13px] font-medium font-['Inter'] shadow-sm mb-6 sm:mb-8 hover:bg-brand/10 dark:hover:bg-brand/30 transition-colors backdrop-blur-sm">
                         <!-- Sparkles Icon - Green Accent -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-brand-green" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-brand-green shrink-0"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                             <path d="M5 3v4M7 5H3" />
                         </svg>
-
-                        AI-Powered Resume Intelligence
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-80" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
+                        <span class="truncate">AI-Powered Resume Intelligence</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-80 shrink-0"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                     </a>
 
-                    <div class="relative mt-8 mb-8 isolate">
-                        <!-- THE GLOW / SHINE - Updated to Green/Navy mix -->
+                    <div class="relative mt-4 sm:mt-8 mb-6 sm:mb-8 isolate">
+                        <!-- THE GLOW / SHINE -->
                         <div
                             class="absolute top-1/2 left-1/2 lg:left-0 lg:translate-x-0 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[500px] h-[140px] bg-brand-green/30 blur-3xl rounded-full pointer-events-none z-0">
                         </div>
 
-                        <!-- UPDATED: Changed to font-black for maximum boldness -->
                         <h1
-                            class="mt-10 mb-8 text-5xl sm:text-7xl font-black leading-[1.1] tracking-tight font-['Inter'] text-[#0B0B14] dark:text-white">
+                            class="mt-8 sm:mt-10 mb-6 sm:mb-8 text-4xl sm:text-5xl md:text-7xl font-black leading-[1.1] tracking-tight font-['Inter'] text-[#0B0B14] dark:text-white break-words">
                             Build a resume that
                             <span class="block text-brand-green mt-1">gets you hired</span>
                         </h1>
                     </div>
 
                     <p
-                        class="mt-7 text-lg sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-['Arial']">
-                        BrandName uses advanced AI to craft job-winning resumes, analyze ATS compatibility, and match your
-                        skills to any job description — in under 60 seconds.
+                        class="mt-5 sm:mt-7 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-['Arial']">
+                        BrandName uses advanced AI to craft job-winning resumes, analyze ATS compatibility, and match
+                        your skills to any job description — in under 60 seconds.
                     </p>
 
-                    <div class="mt-12 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
-                        <!-- Primary Button - Green Accent -->
+                    <div
+                        class="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+                        <!-- Primary Button -->
                         <a href="register.html"
-                            class="inline-flex items-center justify-center gap-2.5 px-8 h-12 rounded-2xl bg-brand-green text-white font-semibold text-[15px] font-['Inter'] shadow-[0_8px_24px_rgba(16,185,129,0.35)] hover:bg-brand-green-dark transition-all hover:-translate-y-0.5">
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 h-12 rounded-2xl bg-brand-green text-white font-semibold text-[15px] font-['Inter'] shadow-[0_8px_24px_rgba(16,185,129,0.35)] hover:bg-brand-green-dark transition-all hover:-translate-y-0.5">
                             Start for Free
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </a>
 
                         <!-- Secondary Button -->
                         <a href="register.html"
-                            class="inline-flex items-center justify-center px-8 h-12 rounded-2xl bg-white dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white font-semibold text-[15px] font-['Inter'] shadow-sm hover:shadow hover:bg-gray-50 dark:hover:bg-white/10 transition-all hover:-translate-y-0.5">
+                            class="w-full sm:w-auto inline-flex items-center justify-center px-8 h-12 rounded-2xl bg-white dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-white font-semibold text-[15px] font-['Inter'] shadow-sm hover:shadow hover:bg-gray-50 dark:hover:bg-white/10 transition-all hover:-translate-y-0.5">
                             Sign In
                         </a>
                     </div>
                 </div>
 
-                <!-- Right Side: Hero Animation Space (New Addition) -->
-                <div class="lg:w-[40%] mt-16 lg:mt-0 flex justify-center lg:justify-end">
-                    <div class="w-full max-w-lg aspect-square lg:aspect-[4/3] rounded-3xl border-2 border-dashed border-brand/30 dark:border-brand-green/30 bg-brand/5 dark:bg-brand-green/5 flex flex-col items-center justify-center text-brand dark:text-brand-green shadow-sm relative overflow-hidden group">
-                        <!-- Helper Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-3 opacity-50 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                <!-- Right Side: Hero Animation Space -->
+                <div class="lg:w-[40%] mt-12 lg:mt-0 flex justify-center lg:justify-end">
+                    <div
+                        class="w-full max-w-lg aspect-square lg:aspect-[4/3] rounded-3xl border-2 border-dashed border-brand/30 dark:border-brand-green/30 bg-brand/5 dark:bg-brand-green/5 flex flex-col items-center justify-center text-brand dark:text-brand-green shadow-sm relative overflow-hidden group">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-10 h-10 mb-3 opacity-50 group-hover:scale-110 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
                         </svg>
-                        <span class="font-bold font-['Inter'] text-sm tracking-wide opacity-80">[ Hero Animation / 3D Graphic Space ]</span>
+                        <span class="font-bold font-['Inter'] text-sm tracking-wide opacity-80 text-center px-4">[ Hero
+                            Animation / 3D Graphic Space ]</span>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-20 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto lg:mx-0 font-['Inter']">
-                <div class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
-                    <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">2.4M+</div>
+            <div
+                class="mt-16 sm:mt-20 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto lg:mx-0 font-['Inter']">
+                <div
+                    class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
+                    <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">100+</div>
                     <div class="text-[11px] sm:text-xs font-medium text-gray-500 dark:text-gray-400 mt-0.5">Resumes
                         built</div>
                 </div>
-                <div class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
-                    <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">89%</div>
+                <div
+                    class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
+                    <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">93%</div>
                     <div class="text-[11px] sm:text-xs font-medium text-gray-500 dark:text-gray-400 mt-0.5">Interview
                         rate</div>
                 </div>
-                <div class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
+                <div
+                    class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
                     <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">4.9★</div>
                     <div class="text-[11px] sm:text-xs font-medium text-gray-500 dark:text-gray-400 mt-0.5">User rating
                     </div>
                 </div>
-                <div class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
+                <div
+                    class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
                     <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">180+</div>
                     <div class="text-[11px] sm:text-xs font-medium text-gray-500 dark:text-gray-400 mt-0.5">Countries
                     </div>
@@ -196,54 +245,41 @@
         </div>
     </section>
 
-    <!-- TRUSTED BY -->
-    <section class="border-t border-gray-100 dark:border-white/10 bg-white dark:bg-[#0B0B14]">
-        <div class="max-w-6xl mx-auto px-6 py-12 text-center font-['Inter']">
-            <p class="text-[11px] font-bold tracking-[0.2em] text-gray-400 dark:text-gray-500 mb-7 uppercase">Trusted by
-                professionals at</p>
-            <div
-                class="flex flex-wrap items-center justify-center gap-x-12 gap-y-5 text-gray-400 dark:text-gray-500 font-bold text-lg sm:text-xl">
-                <span>Google</span>
-                <span>Stripe</span>
-                <span>Figma</span>
-                <span>Notion</span>
-                <span>Vercel</span>
-                <span>Airbnb</span>
-            </div>
-        </div>
-    </section>
-
     <!-- FEATURES -->
-    <section id="features" class="bg-[#F7F7FB] dark:bg-[#101018] py-20">
+    <section id="features" class="bg-[#F7F7FB] dark:bg-[#101018] py-16 sm:py-20">
         <div class="max-w-6xl mx-auto px-6 text-center font-['Inter']">
             <p class="text-brand font-bold text-xs tracking-[0.15em] mb-4 uppercase">FEATURES</p>
 
-            <!-- UPDATED: Changed to font-black for maximum boldness and removed inline styling -->
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white">
+            <h2 class="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white">
                 Everything you need to stand out
             </h2>
 
             <p style="font-weight:lighter;"
-                class="mt-5 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto font-medium mb-12">
+                class="mt-4 sm:mt-5 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto font-medium mb-10 sm:mb-12">
                 From first draft to final PDF, ResumeAI covers every step of the job <br class="hidden sm:block" />
                 application process.
             </p>
 
             <!-- Feature Animation / Dashboard Graphic Space -->
-            <div class="w-full h-48 md:h-80 mb-14 rounded-3xl border-2 border-dashed border-brand/20 dark:border-brand-green/20 bg-brand/5 dark:bg-brand-green/5 flex items-center justify-center text-brand dark:text-brand-green shadow-inner group">
-                <div class="flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mb-2 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+            <div
+                class="w-full h-40 sm:h-48 md:h-80 mb-10 sm:mb-14 rounded-3xl border-2 border-dashed border-brand/20 dark:border-brand-green/20 bg-brand/5 dark:bg-brand-green/5 flex items-center justify-center text-brand dark:text-brand-green shadow-inner group">
+                <div class="flex flex-col items-center px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mb-2 opacity-60" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
                     </svg>
-                    <span class="font-bold text-sm tracking-wide opacity-80">[ App Interface / Feature Showcase Animation Space ]</span>
+                    <span class="font-bold text-sm tracking-wide opacity-80 text-center">[ App Interface / Feature
+                        Showcase Animation Space ]</span>
                 </div>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 text-left">
-                <!-- cards - Changed icons to Green for contrast -->
+                <!-- Card 1 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-7 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-6 sm:p-7 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l1.7 5.6L19 9l-5.3 1.4L12 16l-1.7-5.6L5 9l5.3-1.4L12 2z" />
                         </svg>
@@ -253,9 +289,11 @@
                         points and summaries tailored to your target role using GPT-powered suggestions.</p>
                 </div>
 
+                <!-- Card 2 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-7 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-6 sm:p-7 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M8 17V9m5 8V5m5 12v-6" />
@@ -266,9 +304,11 @@
                         scores against applicant tracking systems and get actionable fixes.</p>
                 </div>
 
+                <!-- Card 3 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-7 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-6 sm:p-7 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="9" />
@@ -276,14 +316,16 @@
                             <circle cx="12" cy="12" r="1" />
                         </svg>
                     </div>
-                    <h3 class="text-lg mb-2 font-bold ">Job-Match Optimizer</h3>
+                    <h3 class="text-lg mb-2 font-bold ">Job-Match Resume Builder</h3>
                     <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Paste any job description and we
                         highlight keyword gaps so you always apply with a tailored resume.</p>
                 </div>
 
+                <!-- Card 4 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-7 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-6 sm:p-7 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
                         </svg>
@@ -293,9 +335,11 @@
                         templates that are clean, modern, and render perfectly everywhere.</p>
                 </div>
 
+                <!-- Card 5 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-7 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-6 sm:p-7 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8M21 7v6h-6" />
@@ -306,9 +350,11 @@
                         application history, and improvement score over time in one dashboard.</p>
                 </div>
 
+                <!-- Card 6 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-7 hover:shadow-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 p-6 sm:p-7 hover:shadow-lg transition-shadow">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green mb-5 shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -325,33 +371,38 @@
 
     <!-- HOW IT WORKS -->
     <section id="how-it-works"
-        class="bg-[#F7F7FB] dark:bg-[#101018] py-20 border-t border-gray-100 dark:border-white/10">
+        class="bg-[#F7F7FB] dark:bg-[#101018] py-16 sm:py-20 border-t border-gray-100 dark:border-white/10">
         <div class="max-w-6xl mx-auto px-6 text-center font-['Inter']">
             <p class="text-brand-green font-bold text-xs tracking-[0.15em] mb-4 uppercase">HOW IT WORKS</p>
-            <!-- UPDATED: Changed to font-black for maximum boldness -->
-            <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-12">
+            <h2
+                class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-gray-900 dark:text-white mb-10 sm:mb-12">
                 From signup to offer letter
             </h2>
 
             <!-- Flow/Steps Animation Space -->
-            <div class="w-full max-w-4xl mx-auto h-32 md:h-48 mb-16 rounded-3xl border-2 border-dashed border-brand/20 dark:border-brand-green/20 bg-brand/5 dark:bg-brand-green/5 flex items-center justify-center text-brand dark:text-brand-green shadow-sm group">
-                <div class="flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mb-2 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            <div
+                class="w-full max-w-4xl mx-auto h-28 sm:h-32 md:h-48 mb-12 sm:mb-16 rounded-3xl border-2 border-dashed border-brand/20 dark:border-brand-green/20 bg-brand/5 dark:bg-brand-green/5 flex items-center justify-center text-brand dark:text-brand-green shadow-sm group">
+                <div class="flex flex-col items-center px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mb-2 opacity-60 shrink-0" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                     </svg>
-                    <span class="font-bold text-sm tracking-wide opacity-80">[ Process / Flow Animation Space ]</span>
+                    <span class="font-bold text-sm tracking-wide opacity-80 text-center">[ Process / Flow Animation
+                        Space ]</span>
                 </div>
             </div>
 
-            <div class="relative grid grid-cols-1 sm:grid-cols-4 gap-10">
-                <!-- Connecting Line -->
+            <!-- Optimized Grid for Mobile & Tablet -->
+            <div class="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- Connecting Line - Hidden on Mobile/Tablet to prevent breaking layout -->
                 <div
-                    class="hidden sm:block absolute top-8 left-[10%] right-[10%] h-px bg-[#E5E7EB] dark:bg-white/10 z-0">
+                    class="hidden lg:block absolute top-8 left-[10%] right-[10%] h-px bg-[#E5E7EB] dark:bg-white/10 z-0">
                 </div>
 
                 <div class="relative">
                     <div
-                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-6 relative z-10 shadow-sm">
+                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-5 sm:mb-6 relative z-10 shadow-sm shrink-0">
                         01
                     </div>
                     <h3 class="font-extrabold text-[17px] mb-2 text-gray-900 dark:text-white">Create your profile</h3>
@@ -361,7 +412,7 @@
 
                 <div class="relative">
                     <div
-                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-6 relative z-10 shadow-sm">
+                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-5 sm:mb-6 relative z-10 shadow-sm shrink-0">
                         02
                     </div>
                     <h3 class="font-extrabold text-[17px] mb-2 text-gray-900 dark:text-white">Paste a job description
@@ -372,7 +423,7 @@
 
                 <div class="relative">
                     <div
-                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-6 relative z-10 shadow-sm">
+                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-5 sm:mb-6 relative z-10 shadow-sm shrink-0">
                         03
                     </div>
                     <h3 class="font-extrabold text-[17px] mb-2 text-gray-900 dark:text-white">Generate &amp; optimize
@@ -383,7 +434,7 @@
 
                 <div class="relative">
                     <div
-                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-6 relative z-10 shadow-sm">
+                        class="w-16 h-16 mx-auto rounded-2xl bg-brand/5 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 flex items-center justify-center text-2xl font-bold text-brand dark:text-brand-light mb-5 sm:mb-6 relative z-10 shadow-sm shrink-0">
                         04
                     </div>
                     <h3 class="font-extrabold text-[17px] mb-2 text-gray-900 dark:text-white">Download &amp; apply</h3>
@@ -396,37 +447,49 @@
 
     <!-- TESTIMONIALS -->
     <section id="testimonials"
-        class="bg-[#F7F7FB] dark:bg-[#101018] py-20 border-t border-gray-100 dark:border-white/10">
+        class="bg-[#F7F7FB] dark:bg-[#101018] py-16 sm:py-20 border-t border-gray-100 dark:border-white/10">
         <div class="max-w-6xl mx-auto px-6 text-center font-['Inter']">
             <p class="text-brand font-bold text-xs tracking-[0.15em] mb-4 uppercase">TESTIMONIALS</p>
 
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white">
+            <h2 class="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-white">
                 Loved by job seekers worldwide
             </h2>
 
-            <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-
+            <div class="mt-10 sm:mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                 <!-- Card 1 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-brand/30 p-5 sm:p-6 flex flex-col justify-between shadow-sm">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-brand/30 p-6 flex flex-col justify-between shadow-sm break-inside-avoid">
                     <div>
-                        <!-- Golden SVG Stars -->
-                        <div class="flex items-center gap-1 mb-2.5">
-                            <!-- Star SVGs... -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]">
-                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                        <div class="flex items-center gap-1 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]">
-                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]">
-                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]">
-                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]">
-                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
                             </svg>
                         </div>
                         <p class="text-gray-500 dark:text-gray-400 text-[13px] leading-relaxed mb-4 font-medium">
@@ -435,26 +498,52 @@
                         </p>
                     </div>
                     <div class="pt-4 border-t border-gray-100 dark:border-white/10 flex items-center gap-3 mt-auto">
-                        <img src="https://i.pravatar.cc/80?img=47" class="w-10 h-10 rounded-full object-cover"
-                            alt="Anshu Negi">
+                        <img src="https://i.pravatar.cc/80?img=47" class="w-10 h-10 rounded-full object-cover shrink-0"
+                            alt="Laskhya Saxena">
                         <div>
-                            <div class="font-bold text-sm text-gray-900 dark:text-white">Anshu Negi</div>
-                            <div class="text-gray-500 dark:text-gray-400 text-xs">Software Engineer @ Google</div>
+                            <div class="font-bold text-sm text-gray-900 dark:text-white line-clamp-1">Laskhya Saxena
+                            </div>
+                            <div class="text-gray-500 dark:text-gray-400 text-xs line-clamp-1">Software Engineer @ Apex
+                                Labs</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-brand/30 p-5 sm:p-6 flex flex-col justify-between shadow-sm">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-brand/30 p-6 flex flex-col justify-between shadow-sm break-inside-avoid">
                     <div>
-                        <div class="flex items-center gap-1 mb-2.5">
-                            <!-- Star SVGs... -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
+                        <div class="flex items-center gap-1 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
                         </div>
                         <p class="text-gray-500 dark:text-gray-400 text-[13px] leading-relaxed mb-4 font-medium">
                             “The job-match feature is a game changer. My resume now reads like it was written
@@ -462,26 +551,51 @@
                         </p>
                     </div>
                     <div class="pt-4 border-t border-gray-100 dark:border-white/10 flex items-center gap-3 mt-auto">
-                        <img src="https://i.pravatar.cc/80?img=12" class="w-10 h-10 rounded-full object-cover"
+                        <img src="https://i.pravatar.cc/80?img=12" class="w-10 h-10 rounded-full object-cover shrink-0"
                             alt="Tanuj Rana">
                         <div>
-                            <div class="font-bold text-sm text-gray-900 dark:text-white">Tanuj Rana</div>
-                            <div class="text-gray-500 dark:text-gray-400 text-xs">Product Manager @ Stripe</div>
+                            <div class="font-bold text-sm text-gray-900 dark:text-white line-clamp-1">Tanuj Rana</div>
+                            <div class="text-gray-500 dark:text-gray-400 text-xs line-clamp-1">Product Manager @ Bare
+                                Metals</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
                 <div
-                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-brand/30 p-5 sm:p-6 flex flex-col justify-between shadow-sm">
+                    class="rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-brand/30 p-6 flex flex-col justify-between shadow-sm break-inside-avoid">
                     <div>
-                        <div class="flex items-center gap-1 mb-2.5">
-                            <!-- Star SVGs... -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#FFC107]"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
+                        <div class="flex items-center gap-1 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 text-[#FFC107]">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
                         </div>
                         <p class="text-gray-500 dark:text-gray-400 text-[13px] leading-relaxed mb-4 font-medium">
                             “Finally a resume tool that gets design. The templates are actually beautiful and my
@@ -489,115 +603,160 @@
                         </p>
                     </div>
                     <div class="pt-4 border-t border-gray-100 dark:border-white/10 flex items-center gap-3 mt-auto">
-                        <img src="https://i.pravatar.cc/80?img=32" class="w-10 h-10 rounded-full object-cover"
+                        <img src="https://i.pravatar.cc/80?img=32" class="w-10 h-10 rounded-full object-cover shrink-0"
                             alt="Priya Sharma">
                         <div>
-                            <div class="font-bold text-sm text-gray-900 dark:text-white">Shubaditya Sirothia</div>
-                            <div class="text-gray-500 dark:text-gray-400 text-xs">UX Designer @ Figma</div>
+                            <div class="font-bold text-sm text-gray-900 dark:text-white line-clamp-1">Shubaditya
+                                Sirothia</div>
+                            <div class="text-gray-500 dark:text-gray-400 text-xs line-clamp-1">Chef @ Kempinski Hotels
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- PRICING -->
-    <section id="pricing" class="bg-[#F7F7FB] dark:bg-[#101018] py-20 font-['Inter']">
+    <section id="pricing" class="bg-[#F7F7FB] dark:bg-[#101018] py-16 sm:py-20 font-['Inter']">
         <div class="max-w-3xl mx-auto px-6 text-center">
             <p class="text-brand font-bold text-xs tracking-[0.15em] mb-4 uppercase">Pricing</p>
-            
-            <!-- UPDATED: Added font-black to ensure maximum boldness -->
-            <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-[#0B0B14] dark:text-white">
+
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0B0B14] dark:text-white">
                 Simple, transparent pricing
             </h2>
-            
+
             <p class="mt-4 text-base text-gray-500 dark:text-gray-400 font-medium max-w-xl mx-auto">
                 Start free, upgrade when you need more power.
             </p>
 
-            <div class="mt-12 grid md:grid-cols-2 gap-6 text-left items-stretch">
-                
+            <div class="mt-10 sm:mt-12 grid md:grid-cols-2 gap-6 text-left items-stretch">
+
                 <!-- Free Tier -->
-                <div class="rounded-3xl bg-white dark:bg-[#161622] border border-gray-200 dark:border-white/10 p-7 sm:p-8 flex flex-col shadow-sm">
+                <div
+                    class="rounded-3xl bg-white dark:bg-[#161622] border border-gray-200 dark:border-white/10 p-7 sm:p-8 flex flex-col shadow-sm">
                     <h3 class="font-extrabold text-2xl text-[#0B0B14] dark:text-white mb-1">Free</h3>
                     <div class="flex items-baseline gap-2 mb-6">
-                        <span class="text-5xl font-black text-[#0B0B14] dark:text-white">$0</span>
+                        <span class="text-4xl sm:text-5xl font-black text-[#0B0B14] dark:text-white">₹0</span>
                         <span class="text-gray-500 dark:text-gray-400 font-medium text-sm">forever</span>
                     </div>
-                    
+
                     <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300 font-medium text-[14px] flex-grow">
                         <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             3 resumes
                         </li>
                         <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             Basic templates
                         </li>
                         <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             ATS score check
                         </li>
                         <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             PDF export
                         </li>
                         <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg class="w-5 h-5 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             AI support
                         </li>
                     </ul>
-                    
-                    <a href="#" class="block w-full py-3.5 rounded-full bg-brand text-white text-center font-bold text-[14px] hover:bg-brand-dark transition-colors mt-auto shadow-sm">
+
+                    <a href="#"
+                        class="block w-full py-3.5 rounded-full bg-brand text-white text-center font-bold text-[14px] hover:bg-brand-dark transition-colors mt-auto shadow-sm">
                         Get Started
                     </a>
                 </div>
 
                 <!-- Pro Tier (Navy Background) -->
-                <div class="rounded-3xl bg-brand p-7 sm:p-8 flex flex-col shadow-[0_20px_50px_-12px_rgba(30,58,138,0.5)] relative z-10">
-                    
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-green text-white text-[10px] font-bold uppercase tracking-wider w-fit mb-4 shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.257c-.224 0-.442-.054-.633-.153l-3.3-1.65-3.3 1.65c-.191.099-.409.153-.633.153h-.257C6.503 14.25 6 14.75 6 15.375v3.375M12 11.25c1.656 0 3-1.344 3-3s-1.344-3-3-3-3 1.344-3 3 1.344 3 3 3z" />
+                <div
+                    class="rounded-3xl bg-brand p-7 sm:p-8 flex flex-col shadow-[0_20px_50px_-12px_rgba(30,58,138,0.5)] relative z-10">
+
+                    <div
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-green text-white text-[10px] font-bold uppercase tracking-wider w-fit mb-4 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.257c-.224 0-.442-.054-.633-.153l-3.3-1.65-3.3 1.65c-.191.099-.409.153-.633.153h-.257C6.503 14.25 6 14.75 6 15.375v3.375M12 11.25c1.656 0 3-1.344 3-3s-1.344-3-3-3-3 1.344-3 3 1.344 3 3 3z" />
                         </svg>
                         Most Popular
                     </div>
-                    
+
                     <h3 class="font-extrabold text-2xl text-white mb-1">Pro</h3>
                     <div class="flex items-baseline gap-2 mb-6">
-                        <span class="text-5xl font-black text-white">$12</span>
+                        <span class="text-4xl sm:text-5xl font-black text-white">₹499</span>
                         <span class="text-white/80 font-medium text-sm">/ month</span>
                     </div>
-                    
+
                     <ul class="space-y-3 mb-8 text-white font-medium text-[14px] flex-grow">
                         <li class="flex items-center gap-3 text-white">
-                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
                             Unlimited resumes
                         </li>
                         <li class="flex items-center gap-3 text-white">
-                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
                             All premium templates
                         </li>
                         <li class="flex items-center gap-3 text-white">
-                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
-                            Offline Resume Check by Expericed HRs
+                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                            Offline Resume Check by Experienced HRs
                         </li>
                         <li class="flex items-center gap-3 text-white">
-                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
                             Job-match optimizer
                         </li>
                         <li class="flex items-center gap-3 text-white">
-                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
                             Priority support
                         </li>
                         <li class="flex items-center gap-3 text-white">
-                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                            <svg class="w-5 h-5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
                             AI content generation
                         </li>
                     </ul>
-                    
-                    <a href="#" class="block w-full py-3.5 rounded-full bg-white text-brand text-center font-bold text-[14px] hover:bg-gray-50 transition-colors mt-auto shadow-sm">
+
+                    <a href="#"
+                        class="block w-full py-3.5 rounded-full bg-white text-brand text-center font-bold text-[14px] hover:bg-gray-50 transition-colors mt-auto shadow-sm">
                         Start Pro Trial
                     </a>
                 </div>
@@ -607,12 +766,14 @@
     </section>
 
     <!-- FINAL CTA -->
-    <section class="bg-white dark:bg-[#0B0B14] py-20 border-t border-gray-100 dark:border-white/10 font-['Inter']">
-        <div class="max-w-5xl mx-auto px-6">
+    <section
+        class="bg-white dark:bg-[#0B0B14] py-16 sm:py-20 border-t border-gray-100 dark:border-white/10 font-['Inter']">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
             <!-- Green to Navy gradient CTA box -->
-            <div class="rounded-3xl bg-gradient-to-br from-brand-green to-brand px-10 py-16 text-center text-white shadow-lg">
+            <div
+                class="rounded-3xl bg-gradient-to-br from-brand-green to-brand px-6 sm:px-10 py-12 sm:py-16 text-center text-white shadow-lg">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-6 opacity-90" fill="none"
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-5 sm:mb-6 opacity-90" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
@@ -620,20 +781,20 @@
 
                 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">Join 2.4 million job
                     seekers</h2>
-                <p class="text-white/90 text-base sm:text-lg max-w-xl mx-auto mb-10 font-medium">Create your free
-                    account today and land your next interview faster than ever before.</p>
+                <p class="text-white/90 text-base sm:text-lg max-w-xl mx-auto mb-8 sm:mb-10 font-medium">Create your
+                    free account today and land your next interview faster than ever before.</p>
 
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href=""
-                        class="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white text-brand-dark font-bold text-[15px] hover:bg-gray-50 transition-colors shadow-sm">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                    <a href="register.html"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white text-brand-dark font-bold text-[15px] hover:bg-gray-50 transition-colors shadow-sm">
                         Create Free Account
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </a>
                     <a href="register.html"
-                        class="inline-flex items-center justify-center px-8 h-12 rounded-full border border-white/30 font-bold text-[15px] hover:bg-white/10 transition-colors">
+                        class="w-full sm:w-auto inline-flex items-center justify-center px-8 h-12 rounded-full border border-white/30 font-bold text-[15px] hover:bg-white/10 transition-colors">
                         Sign In
                     </a>
                 </div>
@@ -643,8 +804,9 @@
 
     <!-- FOOTER -->
     <footer class="bg-white dark:bg-[#0B0B14] border-t border-gray-100 dark:border-white/10 py-10 font-['Inter']">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <a href="#" class="flex items-center gap-3">
+        <div
+            class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <a href="#" class="flex items-center justify-center md:justify-start gap-3">
                 <span
                     class="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm shadow-md shadow-brand-green/30">R</span>
                 <span class="leading-tight">
@@ -667,7 +829,6 @@
         </div>
     </footer>
 
-
     <script>
         const root = document.documentElement;
         const toggle = document.getElementById('themeToggle');
@@ -679,12 +840,23 @@
             moonIcon.classList.toggle('hidden', dark);
             sunIcon.classList.toggle('hidden', !dark);
         }
-
-        // Changed from checking device preference to explicitly forcing 'false' (light mode / white) upon page reload.
         setTheme(false);
-
         toggle.addEventListener('click', () => {
             setTheme(!root.classList.contains('dark'));
+        });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
         });
     </script>
 </body>
