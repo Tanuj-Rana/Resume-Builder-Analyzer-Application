@@ -431,13 +431,6 @@ form label{
 .login-wrapper .input-box i{
     font-size:15px;
 }
-
-.eye{
-    right:18px;
-    left:auto;
-    cursor:pointer;
-}
-
 /*=========================================
         OPTIONS (login only)
 =========================================*/
@@ -596,247 +589,933 @@ footer{
     left:50%;
     bottom:12px;
     transform:translateX(-50%);
-    color:#9ca3af;
-    font-size:13px;
+    font-size:x-small;
 }
 
 /*=========================================
         RESPONSIVE
 =========================================*/
 
-@media(max-width:1200px){
+/*=========================================
+        TABLET & MOBILE
+=========================================*/
 
-    .login-wrapper,
-    .register-wrapper,
-    .forgot-wrapper{
-        height:94vh;
-    }
-
-    .left-panel{
-        padding:32px 36px;
-    }
-
-    .right-panel{
-        padding:28px 36px;
-    }
-
-    .hero-content h1{
-        font-size:42px;
-    }
-
-    .hero-description{
-        font-size:15px;
-    }
-
-    .feature-card{
-        padding:13px 15px;
-    }
-
-    .feature-card span{
-        font-size:15px;
-    }
-}
-
-@media(max-width:992px){
+@media screen and (max-width:900px){
 
     body{
-        overflow:auto;
-        height:auto;
-        min-height:100vh;
-        padding:18px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        padding:0;
+        display:block;
+        background:#eef2ff;
     }
-
     .login-wrapper,
     .register-wrapper,
     .forgot-wrapper{
-        flex-direction:column;
+        width:100%;
+        min-height:100vh;
         height:auto;
+        max-width:100%;
+        border-radius:0;
+        display:block;
+        box-shadow:none;
+        background:transparent;
     }
 
-    .left-panel,
+    /* Hide left side */
+    .left-panel{
+        display:none;
+    }
+
+    /* Right panel */
     .right-panel{
         width:100%;
-    }
-
-    .left-panel{
-        padding:34px 28px;
-    }
-
-    .right-panel{
-        padding:34px 28px;
-    }
-
-    .logo{
-        justify-content:center;
-    }
-
-    .hero-content{
-        text-align:center;
-    }
-
-    .hero-content h1{
-        font-size:38px;
-    }
-
-    .hero-description{
         max-width:100%;
-        margin:auto;
+        min-height:100vh;
+        padding:28px 24px 40px;
+        border-radius:0;
+        background:#ffffff;
+        display:flex;
+        flex-direction:column;
+    }
+
+    .top-bar{
+        margin-bottom:28px;
+    }
+
+    .theme-btn{
+        width:46px;
+        height:46px;
     }
 
     .form-container{
+        width:100%;
         max-width:100%;
+        margin:0;
+        flex:1;
+        justify-content:flex-start;
+    }
+
+    .form-container h1{
+        font-size:20px;
+        line-height:1;
+        margin-bottom:14px;
+    }
+
+    .subtitle{
+        font-size:18px;
+        margin-bottom:32px;
+    }
+
+    form{
+        width:100%;
+    }
+
+    .input-box{
+        margin-bottom:22px;
+    }
+
+    .input-box input{
+        height:60px;
+        font-size:17px;
+    }
+
+    .options{
+        margin:10px 0 26px;
+        align-items:flex-start;
+    }
+
+    .remember{
+        font-size:17px;
+    }
+
+    .options a{
+        font-size:17px;
+    }
+
+    .signin-btn,
+    .register-btn,
+    .verify-btn{
+        height:60px;
+        font-size:20px;
+    }
+
+    .divider{
+        margin:28px 0;
+    }
+
+    .google-btn{
+        height:58px;
+        font-size:17px;
+    }
+
+    .register-text,
+    .signin-text{
+        font-size:16px;
     }
 
     footer{
         position:static;
         transform:none;
-        margin:22px 0;
         text-align:center;
+        margin-top:28px;
+        padding-bottom:15px;
     }
 }
 
-@media(max-width:768px){
 
-    body{
-        padding:12px;
-    }
+/*=========================================
+        SMALL MOBILE
+=========================================*/
 
-    .login-wrapper,
-    .register-wrapper,
-    .forgot-wrapper{
-        border-radius:20px;
-    }
-
-    .left-panel{
-        padding:28px 22px;
-    }
+@media screen and (max-width:480px){
 
     .right-panel{
-        padding:28px 22px;
-    }
-
-    .hero-content h1{
-        font-size:32px;
-    }
-
-    .hero-description{
-        font-size:14px;
-        line-height:1.6;
-    }
-
-    .features{
-        margin-top:22px;
-    }
-
-    .testimonial{
-        flex-direction:column;
-        text-align:center;
+        padding:22px 18px 32px;
     }
 
     .form-container h1{
-        font-size:32px;
-        text-align:center;
+        font-size:40px;
     }
 
     .subtitle{
-        text-align:center;
-        font-size:15px;
-    }
-
-    .options{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:12px;
-    }
-}
-
-@media(max-width:480px){
-
-    .logo{
-        flex-direction:column;
-        gap:12px;
-    }
-
-    .logo-text{
-        text-align:center;
-    }
-
-    .hero-content h1{
-        font-size:28px;
-    }
-
-    .hero-description{
-        font-size:14px;
-    }
-
-    .icon-box{
-        width:52px;
-        height:52px;
-    }
-
-    .icon-box i{
-        font-size:24px;
-    }
-
-    .feature-card{
-        padding:12px;
-        gap:12px;
-    }
-
-    .feature-card span{
-        font-size:14px;
-    }
-
-    .feature-card i{
-        width:34px;
-        height:34px;
-        font-size:14px;
-    }
-
-    .testimonial{
-        padding:14px;
-    }
-
-    .testimonial img{
-        width:48px;
-        height:48px;
-    }
-
-    .testimonial h4{
-        font-size:14px;
-    }
-
-    .testimonial p{
         font-size:12px;
     }
 
-    .top-bar{
-        margin-bottom:18px;
-    }
-
-    .form-container h1{
-        font-size:28px;
-    }
-
-    .subtitle{
-        font-size:14px;
-    }
-
     .input-box input{
-        height:46px;
-        font-size:14px;
+        height:56px;
+        font-size:16px;
     }
 
-    .verify-btn,
-    .register-btn,
     .signin-btn,
-    .google-btn{
-        height:48px;
-        font-size:15px;
+    .register-btn,
+    .verify-btn{
+        height:56px;
+        font-size:18px;
     }
 
-    .signin-text,
-    .register-text{
+    .options{
+        display:flex;
+        gap:12px;
+    }
+
+    .remember{
+        display:flex;
+        white-space:nowrap;
+        font-size:12px;
+    }
+
+    .remember label{
+        white-space:nowrap;
+    }
+    .register-text {
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+    .register-text a{
+        font-size: smaller;
+    }
+    .options a{
+        white-space:nowrap;
         font-size:14px;
     }
+
+
+}
+/*=========================================
+        THEME VARIABLES
+=========================================*/
+
+:root{
+
+    --bg-primary:#eef2ff;
+    --bg-secondary:#ffffff;
+
+    --card-bg:#ffffff;
+    --card-hover:#f8fafc;
+
+    --text-primary:#111827;
+    --text-secondary:#6b7280;
+
+    --border-color:#dce2fa;
+
+    --input-bg:#fafbff;
+    --input-border:#dce2fa;
+
+    --shadow:0 20px 60px rgba(30,41,59,.12);
+
+    --green:#13B981;
+    --green-dark:#0F9D75;
+    --green-light:#5CCBA3;
+
+    --feature-bg:rgba(255,255,255,.12);
+    --feature-border:rgba(255,255,255,.18);
+
+}
+/*=========================================
+            DARK MODE VARIABLES
+=========================================*/
+
+[data-theme="dark"]{
+
+    --bg-primary:#050913;
+    --bg-secondary:#0D1320;
+
+    --card:#111827;
+    --card-hover:#182233;
+
+    --text-primary:#F8FAFC;
+    --text-secondary:#9CA3AF;
+
+    --border:#263347;
+
+    --green:#22C55E;
+    --green2:#4ADE80;
+
+}
+
+
+/*=========================================
+                BODY
+=========================================*/
+
+[data-theme="dark"] body{
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(34,197,94,.08),
+            transparent 30%),
+
+        radial-gradient(circle at bottom right,
+            rgba(34,197,94,.04),
+            transparent 35%),
+
+        #050913;
+
+    color:var(--text-primary);
+
+    transition:.35s;
+
+}
+
+
+/*=========================================
+            MAIN WRAPPER
+=========================================*/
+
+[data-theme="dark"] .login-wrapper,
+[data-theme="dark"] .register-wrapper,
+[data-theme="dark"] .forgot-wrapper{
+
+    background:#0D1320;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55);
+
+}
+
+
+/*=========================================
+            LEFT PANEL
+=========================================*/
+
+[data-theme="dark"] .left-panel{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(circle at 100% 55%,
+            rgba(34,197,94,.10),
+            transparent 45%),
+
+        radial-gradient(circle at 15% 10%,
+            rgba(16,185,129,.18),
+            transparent 28%),
+
+        linear-gradient(
+            135deg,
+            #061018 0%,
+            #07181A 35%,
+            #09231E 70%,
+            #071018 100%
+        );
+
+}
+
+
+/*=========================================
+        GLOW EFFECT
+=========================================*/
+
+[data-theme="dark"] .left-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    right:-320px;
+    top:-120px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle,
+            rgba(34,197,94,.10),
+            transparent 70%);
+
+    pointer-events:none;
+
+}
+
+[data-theme="dark"] .left-panel::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(circle at 80% 80%,
+            rgba(74,222,128,.05),
+            transparent 40%);
+
+    pointer-events:none;
+
+}
+
+
+/*=========================================
+                LOGO
+=========================================*/
+
+[data-theme="dark"] .logo-box{
+
+    background:#ffffff;
+
+    color:#22C55E;
+
+    box-shadow:
+
+        0 10px 25px rgba(0,0,0,.35);
+
+}
+
+[data-theme="dark"] .logo-text h2{
+
+    color:#ffffff;
+
+}
+
+[data-theme="dark"] .logo-text p{
+
+    color:#9CA3AF;
+
+}
+
+
+/*=========================================
+                HERO
+=========================================*/
+
+[data-theme="dark"] .hero-content h1{
+
+    color:#ffffff;
+
+    font-weight:700;
+
+}
+
+[data-theme="dark"] .hero-description{
+
+    color:#AEB7C6;
+
+}
+
+
+/*=========================================
+            FEATURE CARDS
+=========================================*/
+
+[data-theme="dark"] .feature-card{
+
+    background:
+
+        rgba(255,255,255,.035);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+    backdrop-filter:blur(16px);
+
+    transition:.35s;
+
+}
+
+[data-theme="dark"] .feature-card:hover{
+
+    background:
+
+        rgba(34,197,94,.08);
+
+    transform:
+
+        translateY(-3px);
+
+}
+
+[data-theme="dark"] .feature-card i{
+
+    background:
+
+        rgba(34,197,94,.15);
+
+    color:
+
+        #7CFFAA;
+
+}
+
+[data-theme="dark"] .feature-card span{
+
+    color:#F8FAFC;
+
+}
+
+
+/*=========================================
+            TESTIMONIAL
+=========================================*/
+
+[data-theme="dark"] .testimonial{
+
+    background:
+
+        rgba(255,255,255,.035);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+}
+
+[data-theme="dark"] .testimonial h4{
+
+    color:#F8FAFC;
+
+}
+
+[data-theme="dark"] .testimonial p{
+
+    color:#AEB7C6;
+
+}
+
+
+/*=========================================
+            RIGHT PANEL
+=========================================*/
+
+[data-theme="dark"] .right-panel{
+
+    background:#0D1320;
+
+}
+
+
+/*=========================================
+                TOP BAR
+=========================================*/
+
+[data-theme="dark"] .back-link{
+
+    color:#B5C0D0;
+
+}
+
+[data-theme="dark"] .back-link:hover{
+
+    color:#22C55E;
+
+}
+
+[data-theme="dark"] .theme-btn{
+
+    background:#151E2F;
+
+    color:#F8FAFC;
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+
+[data-theme="dark"] .theme-btn:hover{
+
+    background:#1D293B;
+
+}
+
+
+/*=========================================
+            TYPOGRAPHY
+=========================================*/
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] label{
+
+    color:#F8FAFC;
+
+}
+
+[data-theme="dark"] .subtitle{
+
+    color:#AEB7C6;
+
+}
+
+[data-theme="dark"] .register-text,
+[data-theme="dark"] .signin-text{
+
+    color:#9CA3AF;
+
+}
+/*=========================================
+            INPUTS
+=========================================*/
+
+[data-theme="dark"] .input-box input{
+
+    background:#101827;
+
+    border:1px solid #253247;
+
+    color:#F8FAFC;
+
+    transition:.35s;
+
+}
+
+[data-theme="dark"] .input-box input::placeholder{
+
+    color:#8C98AB;
+
+}
+
+[data-theme="dark"] .input-box input:focus{
+
+    border-color:#22C55E;
+
+    background:#131D2B;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,.12),
+        0 10px 25px rgba(34,197,94,.08);
+
+}
+
+[data-theme="dark"] .input-box i{
+
+    color:#8C98AB;
+
+}
+
+[data-theme="dark"] .eye{
+
+    color:#8C98AB;
+
+}
+
+[data-theme="dark"] .eye:hover{
+
+    color:#F8FAFC;
+
+}
+
+
+/*=========================================
+            CHECKBOX
+=========================================*/
+
+[data-theme="dark"] .remember{
+
+    color:#AEB7C6;
+
+}
+
+[data-theme="dark"] .remember input{
+
+    accent-color:#22C55E;
+
+}
+
+[data-theme="dark"] .options a{
+
+    color:#22C55E;
+
+}
+
+[data-theme="dark"] .options a:hover{
+
+    color:#4ADE80;
+
+}
+
+
+/*=========================================
+            PRIMARY BUTTON
+=========================================*/
+
+[data-theme="dark"] .signin-btn,
+[data-theme="dark"] .register-btn,
+[data-theme="dark"] .verify-btn{
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #16A34A 0%,
+            #22C55E 50%,
+            #4ADE80 100%
+        );
+
+    color:#ffffff;
+
+    box-shadow:
+
+        0 12px 35px rgba(34,197,94,.25);
+
+    transition:.35s;
+
+}
+
+[data-theme="dark"] .signin-btn:hover,
+[data-theme="dark"] .register-btn:hover,
+[data-theme="dark"] .verify-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 18px 45px rgba(34,197,94,.38);
+
+}
+
+[data-theme="dark"] .signin-btn:active,
+[data-theme="dark"] .register-btn:active,
+[data-theme="dark"] .verify-btn:active{
+
+    transform:scale(.985);
+
+}
+
+
+/*=========================================
+            DIVIDER
+=========================================*/
+
+[data-theme="dark"] .divider span{
+
+    background:#2A364A;
+
+}
+
+[data-theme="dark"] .divider p{
+
+    color:#7F8CA3;
+
+}
+
+
+/*=========================================
+            GOOGLE BUTTON
+=========================================*/
+
+[data-theme="dark"] .google-btn{
+
+    background:#0F1726;
+
+    border:1px solid #273449;
+
+    color:#F8FAFC;
+
+    transition:.3s;
+
+}
+
+[data-theme="dark"] .google-btn:hover{
+
+    background:#162132;
+
+    border-color:#22C55E;
+
+    box-shadow:
+
+        0 8px 20px rgba(34,197,94,.12);
+
+}
+
+
+/*=========================================
+            LINKS
+=========================================*/
+
+[data-theme="dark"] .signin-text a,
+[data-theme="dark"] .register-text a{
+
+    color:#22C55E;
+
+}
+
+[data-theme="dark"] .signin-text a:hover,
+[data-theme="dark"] .register-text a:hover{
+
+    color:#4ADE80;
+
+}
+
+
+/*=========================================
+            FOOTER
+=========================================*/
+
+[data-theme="dark"] footer{
+
+    color:#6B7280;
+
+}
+
+
+/*=========================================
+            SCROLLBAR
+=========================================*/
+
+[data-theme="dark"]::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+[data-theme="dark"]::-webkit-scrollbar-track{
+
+    background:#08111E;
+
+}
+
+[data-theme="dark"]::-webkit-scrollbar-thumb{
+
+    background:#23324A;
+
+    border-radius:50px;
+
+}
+
+[data-theme="dark"]::-webkit-scrollbar-thumb:hover{
+
+    background:#22C55E;
+
+}
+
+
+/*=========================================
+            ANIMATIONS
+=========================================*/
+
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .testimonial,
+[data-theme="dark"] .google-btn,
+[data-theme="dark"] .theme-btn,
+[data-theme="dark"] .signin-btn,
+[data-theme="dark"] .register-btn,
+[data-theme="dark"] .verify-btn,
+[data-theme="dark"] .input-box input{
+
+    transition:
+
+        background .35s,
+        border-color .35s,
+        color .35s,
+        box-shadow .35s,
+        transform .35s;
+
+}
+
+
+/*=========================================
+            MOBILE
+=========================================*/
+
+@media (max-width:768px){
+
+[data-theme="dark"] body{
+
+    background:#050913;
+
+}
+
+[data-theme="dark"] .right-panel{
+
+    background:#0D1320;
+
+}
+
+[data-theme="dark"] .left-panel{
+
+    display:none;
+
+}
+
+[data-theme="dark"] .login-wrapper,
+[data-theme="dark"] .register-wrapper,
+[data-theme="dark"] .forgot-wrapper{
+
+    background:#0D1320;
+
+    border:none;
+
+    border-radius:0;
+
+    box-shadow:none;
+
+}
+
+[data-theme="dark"] .google-btn{
+
+    background:#101827;
+
+}
+
+}
+
+
+/*=========================================
+        OPTIONAL PREMIUM GLOW
+=========================================*/
+
+[data-theme="dark"] .login-wrapper{
+
+    position:relative;
+
+}
+
+[data-theme="dark"] .login-wrapper::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    top:-220px;
+    left:-220px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle,
+            rgba(34,197,94,.08),
+            transparent 70%);
+
+    pointer-events:none;
+
+}
+
+[data-theme="dark"] .login-wrapper::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    right:-240px;
+    bottom:-240px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle,
+            rgba(16,185,129,.06),
+            transparent 70%);
+
+    pointer-events:none;
+
 }
