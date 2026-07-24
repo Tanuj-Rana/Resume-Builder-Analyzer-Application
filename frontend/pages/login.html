@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,229 +8,256 @@
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./inde.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="../css/auth.css">
-   <script>
-    function toggleTheme() {
-        const html = document.documentElement;
-        const current = html.getAttribute('data-theme') || 'light';
-        const next = current === 'light' ? 'dark' : 'light';
+    <script>
+        // 1. Immediately apply the saved theme to prevent flashing
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            // Default to light mode if nothing is saved
+            const isDark = savedTheme === 'dark';
 
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        updateThemeIcon(next);
-    }
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
 
-    function updateThemeIcon(theme) {
-        const icon = document.querySelector('.theme-btn i');
-        if (!icon) return;
-        icon.classList.toggle('fa-moon', theme === 'light');
-        icon.classList.toggle('fa-sun', theme === 'dark');
-    }
+        // 2. Function to toggle the theme when the button is clicked
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isCurrentlyDark = html.classList.contains('dark');
+            const nextTheme = isCurrentlyDark ? 'light' : 'dark';
 
-    // Set correct icon on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        const theme = document.documentElement.getAttribute('data-theme') || 'light';
-        updateThemeIcon(theme);
-    });
-</script>
+            if (nextTheme === 'dark') {
+                html.classList.add('dark');
+                html.setAttribute('data-theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                html.setAttribute('data-theme', 'light');
+            }
+
+            localStorage.setItem('theme', nextTheme);
+            updateThemeIcons(nextTheme);
+        }
+
+        // 3. Function to update the icons (Moon vs Sun)
+        function updateThemeIcons(theme) {
+            // For landing page SVG icons
+            const moonIcon = document.getElementById('moonIcon');
+            const sunIcon = document.getElementById('sunIcon');
+            if (moonIcon && sunIcon) {
+                moonIcon.classList.toggle('hidden', theme === 'dark');
+                sunIcon.classList.toggle('hidden', theme !== 'dark');
+            }
+
+            // For Auth page FontAwesome icons
+            const authIcon = document.querySelector('.theme-btn i');
+            if (authIcon) {
+                authIcon.className = theme === 'dark' ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+            }
+        }
+
+        // 4. Update icons when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            updateThemeIcons(savedTheme);
+        });
+    </script>
 </head>
+
 <body>
-<div class="login-wrapper">
-    <!-- ================= LEFT PANEL ================= -->
-    <section class="left-panel">
+    <div class="login-wrapper">
+        <!-- ================= LEFT PANEL ================= -->
+        <section class="left-panel">
 
-        <div class="logo">
+            <div class="logo">
 
-            <div class="logo-box">
-                R
+                <div class="logo-box">
+                    R
+                </div>
+
+                <div class="logo-text">
+                    <h2>ResumeAI</h2>
+                    <p>BUILDER & ANALYZER</p>
+                </div>
+
             </div>
 
-            <div class="logo-text">
-                <h2>ResumeAI</h2>
-                <p>BUILDER & ANALYZER</p>
-            </div>
+            <div class="hero-content">
 
-        </div>
+                <h1>
+                    Land your <br>
+                    dream job faster
+                </h1>
 
-        <div class="hero-content">
-
-            <h1>
-                Land your <br>
-                dream job faster
-            </h1>
-
-            <p class="hero-description">
-                Build a standout resume with AI assistance and
-                get instant feedback on your ATS compatibility
-                score.
-            </p>
-
-        </div>
-
-        <div class="features">
-
-            <div class="feature-card">
-                <i class="fa-regular fa-file-lines"></i>
-                <span>AI-powered resume builder</span>
-            </div>
-
-            <div class="feature-card">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <span>Smart content suggestions</span>
-            </div>
-
-            <div class="feature-card">
-                <i class="fa-regular fa-circle-check"></i>
-                <span>ATS score analyzer</span>
-            </div>
-
-        </div>
-
-        <div class="testimonial">
-
-            <img src="../public/images/Anurag.jpeg" alt="Shubhaditya">
-
-            <div>
-
-                <h4>Shubhaditya Sirothia. — Software Engineer</h4>
-
-                <p>
-                    "Got 3 interviews in my first week!"
+                <p class="hero-description">
+                    Build a standout resume with AI assistance and
+                    get instant feedback on your ATS compatibility
+                    score.
                 </p>
 
             </div>
 
-        </div>
+            <div class="features">
 
-    </section>
-
-    <!-- ================= RIGHT PANEL ================= -->
-
-    <section class="right-panel">
-
-        <div class="top-bar">
-
-            <a href="index.html" class="back-link">
-                <i class="fa-solid fa-arrow-left"></i>
-                Back to home
-            </a>
-
-            <button class="theme-btn" onclick="toggleTheme()">
-                <i class="fa-regular fa-moon"></i>
-            </button>
-
-        </div>
-
-        <div class="form-container">
-
-            <h1>Welcome back</h1>
-
-            <p class="subtitle">
-                Sign in to continue building your career
-            </p>
-
-            <form>
-
-                <!-- Email -->
-
-                <label>Email Address</label>
-
-                <div class="input-box">
-
-                    <i class="fa-regular fa-envelope"></i>
-
-                    <input
-                        type="email"
-                        placeholder="you@example.com"
-                    >
-
+                <div class="feature-card">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>AI-powered resume builder</span>
                 </div>
 
-                <!-- Password -->
-
-                <label>Password</label>
-
-                <div class="input-box">
-
-                    <i class="fa-solid fa-lock"></i>
-
-                    <input
-                        type="password"
-                        placeholder="Enter your password"
-                    >
-
-                    <i class="fa-regular fa-eye eye"></i>
-
+                <div class="feature-card">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Smart content suggestions</span>
                 </div>
 
-                <div class="options">
-
-                    <label class="remember">
-
-                        <input type="checkbox">
-
-                        Remember me
-
-                    </label>
-
-                    <a href="forgetpassword.html">
-                        Forgot password?
-                    </a>
-
+                <div class="feature-card">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <span>ATS score analyzer</span>
                 </div>
-
-                <button class="signin-btn">
-                    Sign In
-                </button>
-
-            </form>
-
-            <p class="register-text">
-
-                First time here?
-
-                <a href="register.html">
-                    Create an account
-                </a>
-
-            </p>
-
-            <div class="divider">
-
-                <span></span>
-
-                <p>or continue with</p>
-
-                <span></span>
 
             </div>
 
-            <button class="google-btn">
+            <div class="testimonial">
 
-                <img
-                    src="https://www.svgrepo.com/show/475656/google-color.svg"
-                    alt="Google"
-                >
+                <img src="../public/images/Anurag.jpeg" alt="Shubhaditya">
 
-                Continue with Google
+                <div>
 
-            </button>
+                    <h4>Shubhaditya Sirothia. — Software Engineer</h4>
 
-        </div>
+                    <p>
+                        "Got 3 interviews in my first week!"
+                    </p>
 
-    </section>
+                </div>
 
-</div>
+            </div>
 
-<footer>
+        </section>
 
-    © 2026 ResumeAI. All rights reserved.
+        <!-- ================= RIGHT PANEL ================= -->
 
-</footer>
+        <section class="right-panel">
+
+            <div class="top-bar">
+
+                <a href="index.html" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to home
+                </a>
+
+                <button class="theme-btn" onclick="toggleTheme()">
+                    <i class="fa-regular fa-moon"></i>
+                </button>
+
+            </div>
+
+            <div class="form-container">
+
+                <h1>Welcome back</h1>
+
+                <p class="subtitle">
+                    Sign in to continue building your career
+                </p>
+
+                <form>
+
+                    <!-- Email -->
+
+                    <label>Email Address</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input type="email" placeholder="you@example.com">
+
+                    </div>
+
+                    <!-- Password -->
+
+                    <label>Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password" placeholder="Enter your password">
+
+                        <i class="fa-regular fa-eye eye"></i>
+
+                    </div>
+
+                    <div class="options">
+
+                        <label class="remember">
+
+                            <input type="checkbox">
+
+                            Remember me
+
+                        </label>
+
+                        <a href="forgetpassword.html">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <button class="signin-btn">
+                        Sign In
+                    </button>
+
+                </form>
+
+                <p class="register-text">
+
+                    First time here?
+
+                    <a href="register.html">
+                        Create an account
+                    </a>
+
+                </p>
+
+                <div class="divider">
+
+                    <span></span>
+
+                    <p>or continue with</p>
+
+                    <span></span>
+
+                </div>
+
+                <button class="google-btn">
+
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+
+                    Continue with Google
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+
+        © 2026 ResumeAI. All rights reserved.
+
+    </footer>
 
 </body>
+
 </html>

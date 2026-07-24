@@ -34,7 +34,34 @@
         href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 </head>
+<style>
+    /* Premium Blur & Slide Reveal Animation */
+    @keyframes smoothReveal {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+    }
 
+    /* Base class to apply the animation */
+    .animate-reveal {
+        opacity: 0; /* Keeps it hidden before animation starts */
+        animation: smoothReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Delays for the staggered effect */
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+</style>
 <!-- ADDED: overflow-x-hidden to prevent side-scrolling on mobile -->
 
 <body
@@ -142,7 +169,7 @@
                 <!-- Left Side: Headline & Text -->
                 <div class="lg:w-[55%] relative isolate">
                     <a href="#"
-                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 text-brand dark:text-brand-light text-[13px] font-medium font-['Inter'] shadow-sm mb-6 sm:mb-8 hover:bg-brand/10 dark:hover:bg-brand/30 transition-colors backdrop-blur-sm">
+                        class="animate-reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 dark:bg-brand/20 border border-brand/20 dark:border-brand/40 text-brand dark:text-brand-light text-[13px] font-medium font-['Inter'] shadow-sm mb-6 sm:mb-8 hover:bg-brand/10 dark:hover:bg-brand/30 transition-colors backdrop-blur-sm">
                         <!-- Sparkles Icon - Green Accent -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-brand-green shrink-0"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -158,7 +185,7 @@
                         </svg>
                     </a>
 
-                    <div class="relative mt-4 sm:mt-8 mb-6 sm:mb-8 isolate">
+                    <div class="animate-reveal delay-100 relative mt-4 sm:mt-8 mb-6 sm:mb-8 isolate">
                         <!-- THE GLOW / SHINE -->
                         <div
                             class="absolute top-1/2 left-1/2 lg:left-0 lg:translate-x-0 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[500px] h-[140px] bg-brand-green/30 blur-3xl rounded-full pointer-events-none z-0">
@@ -172,13 +199,13 @@
                     </div>
 
                     <p
-                        class="mt-5 sm:mt-7 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-['Arial']">
+                        class="animate-reveal delay-200 mt-5 sm:mt-7 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-['Arial']">
                         BrandName uses advanced AI to craft job-winning resumes, analyze ATS compatibility, and match
                         your skills to any job description — in under 60 seconds.
                     </p>
 
                     <div
-                        class="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+                        class="animate-reveal delay-300 mt-10 sm:mt-12 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
                         <!-- Primary Button -->
                         <a href="register.html"
                             class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 h-12 rounded-2xl bg-brand-green text-white font-semibold text-[15px] font-['Inter'] shadow-[0_8px_24px_rgba(16,185,129,0.35)] hover:bg-brand-green-dark transition-all hover:-translate-y-0.5">
@@ -216,7 +243,7 @@
             </div>
 
             <div
-                class="mt-16 sm:mt-20 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto lg:mx-0 font-['Inter']">
+                class="animate-reveal delay-500 mt-16 sm:mt-20 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto lg:mx-0 font-['Inter']">
                 <div
                     class="rounded-xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm py-3 px-2">
                     <div class="text-xl sm:text-2xl font-extrabold text-brand tracking-tight">100+</div>

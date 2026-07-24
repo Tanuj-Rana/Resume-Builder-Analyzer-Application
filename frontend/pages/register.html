@@ -5,287 +5,305 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ResumeAI | Register</title>
 
     <!-- Google Font -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/auth.css">
     <!-- Font Awesome -->
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <script>
+    // 1. Immediately apply the saved theme to prevent flashing
+    (function () {
+        const savedTheme = localStorage.getItem('theme');
+        // Default to light mode if nothing is saved
+        const isDark = savedTheme === 'dark';
+
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    })();
+
+    // 2. Function to toggle the theme when the button is clicked
     function toggleTheme() {
         const html = document.documentElement;
-        const current = html.getAttribute('data-theme') || 'light';
-        const next = current === 'light' ? 'dark' : 'light';
+        const isCurrentlyDark = html.classList.contains('dark');
+        const nextTheme = isCurrentlyDark ? 'light' : 'dark';
 
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        updateThemeIcon(next);
+        if (nextTheme === 'dark') {
+            html.classList.add('dark');
+            html.setAttribute('data-theme', 'dark');
+        } else {
+            html.classList.remove('dark');
+            html.setAttribute('data-theme', 'light');
+        }
+
+        localStorage.setItem('theme', nextTheme);
+        updateThemeIcons(nextTheme);
     }
 
-    function updateThemeIcon(theme) {
-        const icon = document.querySelector('.theme-btn i');
-        if (!icon) return;
-        icon.classList.toggle('fa-moon', theme === 'light');
-        icon.classList.toggle('fa-sun', theme === 'dark');
+    // 3. Function to update the icons (Moon vs Sun)
+    function updateThemeIcons(theme) {
+        // For landing page SVG icons
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+        if (moonIcon && sunIcon) {
+            moonIcon.classList.toggle('hidden', theme === 'dark');
+            sunIcon.classList.toggle('hidden', theme !== 'dark');
+        }
+
+        // For Auth page FontAwesome icons
+        const authIcon = document.querySelector('.theme-btn i');
+        if (authIcon) {
+            authIcon.className = theme === 'dark' ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+        }
     }
 
-    // Set correct icon on page load
+    // 4. Update icons when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', () => {
-        const theme = document.documentElement.getAttribute('data-theme') || 'light';
-        updateThemeIcon(theme);
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        updateThemeIcons(savedTheme);
     });
 </script>
+
 <body>
 
-<div class="register-wrapper">
+    <div class="register-wrapper">
 
-    <!-- ================= LEFT PANEL ================= -->
+        <!-- ================= LEFT PANEL ================= -->
 
-    <section class="left-panel">
+        <section class="left-panel">
 
-        <div class="logo">
+            <div class="logo">
 
-            <div class="logo-box">
-                R
-            </div>
+                <div class="logo-box">
+                    R
+                </div>
 
-            <div class="logo-text">
+                <div class="logo-text">
 
-                <h2>ResumeAI</h2>
+                    <h2>ResumeAI</h2>
 
-                <p>BUILDER & ANALYZER</p>
+                    <p>BUILDER & ANALYZER</p>
 
-            </div>
-
-        </div>
-
-        <div class="hero-content">
-
-            <h1>
-                Land your <br>
-                dream job faster
-            </h1>
-
-            <p class="hero-description">
-
-                Build a standout resume with AI assistance and
-                get instant feedback on your ATS compatibility
-                score.
-
-            </p>
-
-        </div>
-
-        <div class="features">
-
-            <div class="feature-card">
-
-                <i class="fa-regular fa-file-lines"></i>
-
-                <span>AI-powered resume builder</span>
+                </div>
 
             </div>
 
-            <div class="feature-card">
+            <div class="hero-content">
 
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h1>
+                    Land your <br>
+                    dream job faster
+                </h1>
 
-                <span>Smart content suggestions</span>
+                <p class="hero-description">
 
-            </div>
+                    Build a standout resume with AI assistance and
+                    get instant feedback on your ATS compatibility
+                    score.
 
-            <div class="feature-card">
-
-                <i class="fa-regular fa-circle-check"></i>
-
-                <span>ATS score analyzer</span>
-
-            </div>
-
-        </div>
-
-        <div class="testimonial">
-
-            <img src="../public/images/Anurag.jpeg"
-                 alt="Shubhaditya">
-
-            <div>
-
-                <h4>Shubhaditya Sirothia. — Software Engineer</h4>
-
-                <p>
-                    "Got 3 interviews in my first week!"
                 </p>
 
             </div>
 
-        </div>
+            <div class="features">
 
-    </section>
+                <div class="feature-card">
 
-    <!-- ================= RIGHT PANEL ================= -->
+                    <i class="fa-regular fa-file-lines"></i>
 
-    <section class="right-panel">
-
-        <!-- Top -->
-
-        <div class="top-bar">
-
-            <a href="index.html"
-               class="back-link">
-
-                <i class="fa-solid fa-arrow-left"></i>
-
-                Back to home
-
-            </a>
-
-            <button class="theme-btn" onclick="toggleTheme()">
-
-                <i class="fa-regular fa-moon"></i>
-
-            </button>
-
-        </div>
-
-        <!-- Form -->
-
-        <div class="form-container">
-
-            <h1>Create account</h1>
-
-            <p class="subtitle">
-
-                Start building your professional
-                resume today
-
-            </p>
-
-            <form action="#">
-
-                <!-- Full Name -->
-
-                <label>
-
-                    Full Name
-
-                </label>
-
-                <div class="input-box">
-
-                    <i class="fa-regular fa-user"></i>
-
-                    <input
-                            type="text"
-                            placeholder="Jane Doe">
+                    <span>AI-powered resume builder</span>
 
                 </div>
 
-                <!-- Email -->
+                <div class="feature-card">
 
-                <label>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
 
-                    Email Address
-
-                </label>
-
-                <div class="input-box">
-
-                    <i class="fa-regular fa-envelope"></i>
-
-                    <input
-                            type="email"
-                            placeholder="you@example.com">
+                    <span>Smart content suggestions</span>
 
                 </div>
 
-                <!-- Password -->
+                <div class="feature-card">
 
-                <label>
+                    <i class="fa-regular fa-circle-check"></i>
 
-                    Password
-
-                </label>
-
-                <div class="input-box">
-
-                    <i class="fa-solid fa-lock"></i>
-
-                    <input
-                            type="password"
-                            placeholder="Min. 8 characters">
-
-                    <i class="fa-regular fa-eye eye"></i>
+                    <span>ATS score analyzer</span>
 
                 </div>
 
-                <!-- Confirm Password -->
+            </div>
 
-                <label>
+            <div class="testimonial">
 
-                    Confirm Password
+                <img src="../public/images/Anurag.jpeg" alt="Shubhaditya">
 
-                </label>
+                <div>
 
-                <div class="input-box">
+                    <h4>Shubhaditya Sirothia. — Software Engineer</h4>
 
-                    <i class="fa-solid fa-lock"></i>
-
-                    <input
-                            type="password"
-                            placeholder="Repeat your password">
-
-                    <i class="fa-regular fa-eye eye"></i>
+                    <p>
+                        "Got 3 interviews in my first week!"
+                    </p>
 
                 </div>
 
-                <button
-                        class="register-btn">
+            </div>
 
-                    Create Account
+        </section>
 
-                </button>
+        <!-- ================= RIGHT PANEL ================= -->
 
-            </form>
+        <section class="right-panel">
 
-            <p class="signin-text">
+            <!-- Top -->
 
-                Already have an account?
+            <div class="top-bar">
 
-                <a href="login.html">
+                <a href="index.html" class="back-link">
 
-                    Sign in
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to home
 
                 </a>
 
-            </p>
+                <button class="theme-btn" onclick="toggleTheme()">
 
-        </div>
+                    <i class="fa-regular fa-moon"></i>
 
-    </section>
+                </button>
 
-</div>
+            </div>
 
-<footer>
+            <!-- Form -->
 
-    © 2026 ResumeAI. All rights reserved.
+            <div class="form-container">
 
-</footer>
+                <h1>Create account</h1>
+
+                <p class="subtitle">
+
+                    Start building your professional
+                    resume today
+
+                </p>
+
+                <form action="#">
+
+                    <!-- Full Name -->
+
+                    <label>
+
+                        Full Name
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input type="text" placeholder="Arnav Sharma">
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <label>
+
+                        Email Address
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input type="email" placeholder="you@example.com">
+
+                    </div>
+
+                    <!-- Password -->
+
+                    <label>
+
+                        Password
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password" placeholder="Min. 8 characters">
+
+                        <i class="fa-regular fa-eye eye"></i>
+
+                    </div>
+
+                    <!-- Confirm Password -->
+
+                    <label>
+
+                        Confirm Password
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password" placeholder="Repeat your password">
+
+                        <i class="fa-regular fa-eye eye"></i>
+
+                    </div>
+
+                    <button class="register-btn">
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+                <p class="signin-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+
+                        Sign in
+
+                    </a>
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+
+        © 2026 ResumeAI. All rights reserved.
+
+    </footer>
 
 </body>
 
