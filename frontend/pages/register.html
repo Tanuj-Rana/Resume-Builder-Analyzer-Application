@@ -20,17 +20,36 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="./register.css">
+    <link rel="stylesheet" href="auth.css">
     <!-- Font Awesome -->
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <link rel="stylesheet"
-          href="auth.css">
-
 </head>
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
 
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+        const icon = document.querySelector('.theme-btn i');
+        if (!icon) return;
+        icon.classList.toggle('fa-moon', theme === 'light');
+        icon.classList.toggle('fa-sun', theme === 'dark');
+    }
+
+    // Set correct icon on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const theme = document.documentElement.getAttribute('data-theme') || 'light';
+        updateThemeIcon(theme);
+    });
+</script>
 <body>
 
 <div class="register-wrapper">
@@ -136,7 +155,7 @@
 
             </a>
 
-            <button class="theme-btn">
+            <button class="theme-btn" onclick="toggleTheme()">
 
                 <i class="fa-regular fa-moon"></i>
 
