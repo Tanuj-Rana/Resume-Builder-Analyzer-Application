@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeAI Layout</title>
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- SIDEBAR CONTAINER -->
+  <aside class="sidebar">
+
+    <!-- 1. FIXED TOP: BRAND & SECTION TITLE -->
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-logo">R</div>
+        <div class="brand-text">
+          <div class="title">ResumeAI</div>
+          <div class="subtitle">BUILDER & ANALYZER</div>
+        </div>
+      </div>
+      <div class="menu-label">MENU</div>
+    </div>
+
+    <!-- 2. SCROLLABLE MIDDLE: MENU ITEMS (Home to Learning Center) -->
+    <nav class="sidebar-nav">
+      <ul class="nav-list">
+        <li class="nav-item active">
+          <a href="#"><i class="fa-solid fa-border-all"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-regular fa-file-lines"></i> My Resumes</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-pen-nib"></i> Resume Builder</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-chart-simple"></i> ATS Analyzer</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-briefcase"></i> Job Matcher</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-paper-plane"></i> Cover Letters</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-layer-group"></i> Templates</a>
+        </li>
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-graduation-cap"></i> Learning Center</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- 3. FIXED BOTTOM: SETTINGS, UPGRADE BOX & USER PROFILE -->
+    <div class="sidebar-footer">
+      <div class="divider"></div>
+
+      <!-- Settings Item -->
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+        </li>
+      </ul>
+
+      <!-- Upgrade Box -->
+      <div class="pro-card">
+        <i class="fa-solid fa-crown crown-icon"></i>
+        <h4>Upgrade to Pro</h4>
+        <p>Unlimited resumes, AI generation & expert reviews.</p>
+        <button class="pro-btn">Upgrade — $12/mo</button>
+      </div>
+
+      <!-- Profile Bottom Bar -->
+      <div class="user-footer">
+        <div class="user-info">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
+            alt="Sarah Mitchell" class="user-avatar" />
+          <span class="user-name">Sarah Mitchell</span>
+        </div>
+        <button class="logout-btn" title="Logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN AREA WITH HEADER -->
+  <div class="main-wrapper">
+    <!-- TOP HEADER -->
+    <header class="header">
+      <!-- Theme Toggle Button -->
+      <button class="header-icon-btn">
+        <i class="fa-regular fa-moon"></i>
+      </button>
+
+      <!-- Notification Bell -->
+      <button class="header-icon-btn">
+        <i class="fa-regular fa-bell"></i>
+        <span class="notification-dot"></span>
+      </button>
+
+      <!-- User Profile Dropdown -->
+      <div class="profile-pill">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
+          alt="Sarah Profile" />
+        <span>Sarah</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </header>
+
+    <!-- MAIN BODY CONTENT (LEFT BLANK) -->
+    <main class="main-content">
+      <!-- DASHBOARD MAIN CONTENT -->
+      <div class="dash-container">
+
+        <!-- AI HERO SECTION -->
+        <section class="dash-hero">
+          <div class="dash-hero-header">
+            <span class="dash-ai-badge">
+              <i class="fa-solid fa-atom"></i>
+            </span>
+            <span class="dash-ai-title">ResumeAI Assistant</span>
+            <span class="dash-status-dot"></span>
+            <span class="dash-status-text">Online</span>
+          </div>
+
+          <h1 class="dash-hero-headline">What will you work on today?</h1>
+          <p class="dash-hero-subtext">Ask me anything about your resume, ATS score, or job search.</p>
+
+          <!-- AI Input Bar -->
+          <div class="dash-input-box">
+            <i class="fa-solid fa-wand-magic-sparkles dash-sparkle-icon"></i>
+            <input type="text" placeholder="e.g. What keywords am I missing for a SWE role at Google?"
+              class="dash-input-field" />
+            <button class="dash-send-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+
+          <!-- Quick Prompt Pills -->
+          <div class="dash-pills-container">
+            <button class="dash-pill-btn">Improve ATS score</button>
+            <button class="dash-pill-btn">Add missing keywords</button>
+            <button class="dash-pill-btn">Rewrite my summary</button>
+            <button class="dash-pill-btn">Suggest job titles</button>
+          </div>
+        </section>
+
+        <!-- STATS CARDS GRID -->
+        <section class="dash-stats-grid">
+
+          <!-- Card 1: Total Resumes -->
+          <div class="dash-stat-card">
+            <div class="dash-card-top">
+              <div class="dash-icon-box purple">
+                <i class="fa-regular fa-file-lines"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up dash-card-arrow"></i>
+            </div>
+            <div class="dash-card-num">4</div>
+            <div class="dash-card-label">Total Resumes</div>
+            <div class="dash-card-sub text-muted">+1 this month</div>
+          </div>
+
+          <!-- Card 2: Avg ATS Score -->
+          <div class="dash-stat-card">
+            <div class="dash-card-top">
+              <div class="dash-icon-box green">
+                <i class="fa-solid fa-chart-simple"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up dash-card-arrow"></i>
+            </div>
+            <div class="dash-card-num">68%</div>
+            <div class="dash-card-label">Avg ATS Score</div>
+            <div class="dash-card-sub text-green">
+              <i class="fa-solid fa-arrow-up"></i> 12 pts since last month
+            </div>
+          </div>
+
+          <!-- Card 3: Job Matches -->
+          <div class="dash-stat-card">
+            <div class="dash-card-top">
+              <div class="dash-icon-box orange">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up dash-card-arrow"></i>
+            </div>
+            <div class="dash-card-num">12</div>
+            <div class="dash-card-label">Job Matches</div>
+            <div class="dash-card-sub text-muted">3 new this week</div>
+          </div>
+
+          <!-- Card 4: AI Suggestions -->
+          <div class="dash-stat-card">
+            <div class="dash-card-top">
+              <div class="dash-icon-box pink">
+                <i class="fa-regular fa-lightbulb"></i>
+              </div>
+              <i class="fa-solid fa-chevron-up dash-card-arrow"></i>
+            </div>
+            <div class="dash-card-num">4</div>
+            <div class="dash-card-label">AI Suggestions</div>
+            <div class="dash-card-sub text-muted">Ready to apply</div>
+          </div>
+
+        </section>
+
+        <!-- RECENTS SECTION -->
+        <div class="part2-recents-container">
+
+          <!-- Header & Toolbar -->
+          <div class="part2-header-bar">
+            <div class="part2-title-group">
+              <h2 class="part2-main-title">Recents</h2>
+              <span class="part2-sub-count">4 resumes</span>
+            </div>
+
+            <div class="part2-toolbar-controls">
+              <!-- Filter Button -->
+              <button class="part2-filter-btn">
+                <i class="fa-solid fa-sliders"></i> Filter
+              </button>
+
+              <!-- View Switcher Toggle -->
+              <div class="part2-view-toggle-group">
+                <button class="part2-toggle-btn part2-active" id="part2-grid-view-btn" onclick="part2SwitchView('grid')"
+                  title="Grid View">
+                  <i class="fa-solid fa-border-all"></i>
+                </button>
+                <button class="part2-toggle-btn" id="part2-list-view-btn" onclick="part2SwitchView('list')"
+                  title="List View">
+                  <i class="fa-solid fa-bars"></i>
+                </button>
+              </div>
+
+              <!-- New Resume Button -->
+              <button class="part2-new-btn">
+                <i class="fa-solid fa-plus"></i> New
+              </button>
+            </div>
+          </div>
+
+          <!-- VIEW 1: GRID VIEW (DEFAULT) -->
+          <div class="part2-view-container part2-grid-layout" id="part2-grid-wrapper">
+
+            <!-- Create New Box -->
+            <div class="part2-grid-card part2-create-card">
+              <div class="part2-create-icon-wrapper">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="part2-create-title">New Resume</div>
+              <div class="part2-card-footer-info">
+                <div class="part2-item-title">Create new</div>
+                <div class="part2-item-sub">Start from scratch or template</div>
+              </div>
+            </div>
+
+            <!-- Resume 1: Software Engineer (Blue/Purple) -->
+            <div class="part2-grid-card part2-theme-blue">
+              <div class="part2-resume-preview">
+                <div class="part2-preview-badge green-badge">83%</div>
+                <div class="part2-preview-lines">
+                  <div class="part2-line header-line blue"></div>
+                  <div class="part2-line subheader-line"></div>
+                  <div class="part2-line body-line"></div>
+                  <div class="part2-line body-line short"></div>
+                </div>
+              </div>
+              <div class="part2-card-footer-info">
+                <div class="part2-item-title">Software Engineer</div>
+                <div class="part2-item-sub">Google · Meta · Stripe</div>
+                <div class="part2-card-meta">
+                  <span><i class="fa-regular fa-clock"></i> 2 hours ago</span>
+                  <span class="part2-status-pill green"><i class="fa-solid fa-check"></i> Analyzed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resume 2: Product Manager (Green) -->
+            <div class="part2-grid-card part2-theme-green">
+              <div class="part2-resume-preview">
+                <div class="part2-preview-badge yellow-badge">67%</div>
+                <div class="part2-preview-lines">
+                  <div class="part2-line header-line green"></div>
+                  <div class="part2-line subheader-line"></div>
+                  <div class="part2-line body-line"></div>
+                  <div class="part2-line body-line short"></div>
+                </div>
+              </div>
+              <div class="part2-card-footer-info">
+                <div class="part2-item-title">Product Manager</div>
+                <div class="part2-item-sub">Stripe · Linear · Notion</div>
+                <div class="part2-card-meta">
+                  <span><i class="fa-regular fa-clock"></i> Yesterday</span>
+                  <span class="part2-status-pill green"><i class="fa-solid fa-check"></i> Analyzed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resume 3: UX Designer (Purple) -->
+            <div class="part2-grid-card part2-theme-purple">
+              <div class="part2-resume-preview">
+                <div class="part2-preview-badge yellow-badge">55%</div>
+                <div class="part2-preview-lines">
+                  <div class="part2-line header-line purple"></div>
+                  <div class="part2-line subheader-line"></div>
+                  <div class="part2-line body-line"></div>
+                  <div class="part2-line body-line short"></div>
+                </div>
+              </div>
+              <div class="part2-card-footer-info">
+                <div class="part2-item-title">UX Designer</div>
+                <div class="part2-item-sub">Figma · Apple · Adobe</div>
+                <div class="part2-card-meta">
+                  <span><i class="fa-regular fa-clock"></i> 3 days ago</span>
+                  <span class="part2-status-pill yellow">Needs Analysis</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resume 4: Data Analyst (Orange) -->
+            <div class="part2-grid-card part2-theme-orange">
+              <div class="part2-resume-preview">
+                <div class="part2-preview-badge gray-badge">Draft</div>
+                <div class="part2-preview-lines">
+                  <div class="part2-line header-line orange"></div>
+                  <div class="part2-line subheader-line"></div>
+                  <div class="part2-line body-line"></div>
+                  <div class="part2-line body-line short"></div>
+                </div>
+              </div>
+              <div class="part2-card-footer-info">
+                <div class="part2-item-title">Data Analyst</div>
+                <div class="part2-item-sub">Airbnb · Spotify · Netflix</div>
+                <div class="part2-card-meta">
+                  <span><i class="fa-regular fa-clock"></i> 1 week ago</span>
+                  <span class="part2-status-pill gray">Draft</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- VIEW 2: LIST VIEW (HIDDEN BY DEFAULT) -->
+          <div class="part2-view-container part2-list-layout part2-hidden" id="part2-list-wrapper">
+            <div class="part2-list-box">
+
+              <!-- List Row 1 -->
+              <div class="part2-list-row">
+                <div class="part2-list-left">
+                  <div class="part2-avatar-icon blue"><span>O</span></div>
+                  <div class="part2-list-text">
+                    <div class="part2-item-title">Software Engineer</div>
+                    <div class="part2-item-sub">Google · Meta · Stripe</div>
+                  </div>
+                </div>
+                <div class="part2-list-right">
+                  <span class="part2-badge green">83%</span>
+                  <span class="part2-time-text">2 hours ago</span>
+                  <button class="part2-icon-action"><i class="fa-regular fa-pen-to-square"></i></button>
+                  <button class="part2-icon-action"><i class="fa-solid fa-download"></i></button>
+                </div>
+              </div>
+
+              <!-- List Row 2 -->
+              <div class="part2-list-row">
+                <div class="part2-list-left">
+                  <div class="part2-avatar-icon green"><span>O</span></div>
+                  <div class="part2-list-text">
+                    <div class="part2-item-title">Product Manager</div>
+                    <div class="part2-item-sub">Stripe · Linear · Notion</div>
+                  </div>
+                </div>
+                <div class="part2-list-right">
+                  <span class="part2-badge yellow">67%</span>
+                  <span class="part2-time-text">Yesterday</span>
+                  <button class="part2-icon-action"><i class="fa-regular fa-pen-to-square"></i></button>
+                  <button class="part2-icon-action"><i class="fa-solid fa-download"></i></button>
+                </div>
+              </div>
+
+              <!-- List Row 3 -->
+              <div class="part2-list-row">
+                <div class="part2-list-left">
+                  <div class="part2-avatar-icon purple"><span>O</span></div>
+                  <div class="part2-list-text">
+                    <div class="part2-item-title">UX Designer</div>
+                    <div class="part2-item-sub">Figma · Apple · Adobe</div>
+                  </div>
+                </div>
+                <div class="part2-list-right">
+                  <span class="part2-badge yellow">55%</span>
+                  <span class="part2-time-text">3 days ago</span>
+                  <button class="part2-icon-action"><i class="fa-regular fa-pen-to-square"></i></button>
+                  <button class="part2-icon-action"><i class="fa-solid fa-download"></i></button>
+                </div>
+              </div>
+
+              <!-- List Row 4 -->
+              <div class="part2-list-row">
+                <div class="part2-list-left">
+                  <div class="part2-avatar-icon orange"><span>O</span></div>
+                  <div class="part2-list-text">
+                    <div class="part2-item-title">Data Analyst</div>
+                    <div class="part2-item-sub">Airbnb · Spotify · Netflix</div>
+                  </div>
+                </div>
+                <div class="part2-list-right">
+                  <span class="part2-badge gray">Draft</span>
+                  <span class="part2-time-text">1 week ago</span>
+                  <button class="part2-icon-action"><i class="fa-regular fa-pen-to-square"></i></button>
+                  <button class="part2-icon-action"><i class="fa-solid fa-download"></i></button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+    </main>
+  </div>
+</body>
+
+</html>
