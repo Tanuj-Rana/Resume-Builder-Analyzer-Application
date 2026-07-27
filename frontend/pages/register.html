@@ -202,81 +202,48 @@
                     resume today
 
                 </p>
+                <div id="form-message" class="form-message" style="display: none;"></div>
+                <form id="register-form">
 
-                <form action="#">
-
-                    <!-- Full Name -->
-
-                    <label>
-
-                        Full Name
-
-                    </label>
-
+                    <!-- First Name -->
+                    <label>First Name</label>
                     <div class="input-box">
-
                         <i class="fa-regular fa-user"></i>
+                        <input type="text" id="first_name" placeholder="First Name" required>
+                    </div>
 
-                        <input type="text" placeholder="Arnav Sharma">
-
+                    <!-- Last Name -->
+                    <label>Last Name</label>
+                    <div class="input-box">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="last_name" placeholder="Last Name" required>
                     </div>
 
                     <!-- Email -->
-
-                    <label>
-
-                        Email Address
-
-                    </label>
-
+                    <label>Email Address</label>
                     <div class="input-box">
-
                         <i class="fa-regular fa-envelope"></i>
-
-                        <input type="email" placeholder="you@example.com">
-
+                        <input type="email" id="register-email" placeholder="you@example.com" required>
                     </div>
 
                     <!-- Password -->
-
-                    <label>
-
-                        Password
-
-                    </label>
-
+                    <label>Password</label>
                     <div class="input-box">
-
                         <i class="fa-solid fa-lock"></i>
-
-                        <input type="password" placeholder="Min. 8 characters">
-
+                        <input type="password" id="register-password" placeholder="Min. 8 characters" required>
                         <i class="fa-regular fa-eye eye"></i>
-
                     </div>
 
                     <!-- Confirm Password -->
-
-                    <label>
-
-                        Confirm Password
-
-                    </label>
-
+                    <label>Confirm Password</label>
                     <div class="input-box">
-
                         <i class="fa-solid fa-lock"></i>
-
-                        <input type="password" placeholder="Repeat your password">
-
+                        <input type="password" id="confirm_password" placeholder="Repeat your password" required>
                         <i class="fa-regular fa-eye eye"></i>
-
                     </div>
 
-                    <button class="register-btn">
-
+                    <button type="submit" class="register-btn">
                         Create Account
-
                     </button>
 
                 </form>
@@ -304,7 +271,7 @@
         © 2026 ResumeAI. All rights reserved.
 
     </footer>
-
+    <script src="../js/auth.js"></script>
 </body>
 
 </html>
