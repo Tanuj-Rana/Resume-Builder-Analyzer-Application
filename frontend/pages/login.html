@@ -167,52 +167,38 @@
                 <p class="subtitle">
                     Sign in to continue building your career
                 </p>
-
-                <form>
+                <div id="form-message" class="form-message" style="display: none;"></div>
+                <form id="login-form">
 
                     <!-- Email -->
-
                     <label>Email Address</label>
-
                     <div class="input-box">
-
                         <i class="fa-regular fa-envelope"></i>
-
-                        <input type="email" placeholder="you@example.com">
-
+                        <!-- 2. Add id="login-email" to the email input -->
+                        <input type="email" id="login-email" placeholder="you@example.com" required>
                     </div>
 
                     <!-- Password -->
-
                     <label>Password</label>
-
                     <div class="input-box">
-
                         <i class="fa-solid fa-lock"></i>
-
-                        <input type="password" placeholder="Enter your password">
-
+                        <!-- 3. Add id="login-password" to the password input -->
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
                         <i class="fa-regular fa-eye eye"></i>
-
                     </div>
 
                     <div class="options">
-
                         <label class="remember">
-
                             <input type="checkbox">
-
                             Remember me
-
                         </label>
-
                         <a href="forgetpassword.html">
                             Forgot password?
                         </a>
-
                     </div>
 
-                    <button class="signin-btn">
+                    <!-- 4. Add type="submit" so the form knows this button triggers the submit event -->
+                    <button type="submit" class="signin-btn">
                         Sign In
                     </button>
 
@@ -257,7 +243,7 @@
         © 2026 ResumeAI. All rights reserved.
 
     </footer>
-
+    <script src="../js/auth.js"></script>
 </body>
 
 </html>

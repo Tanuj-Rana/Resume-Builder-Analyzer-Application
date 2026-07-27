@@ -923,3 +923,40 @@ body {
         background: #0B0B14 !important;
     }
 }
+
+.form-message {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Soft Red Error Box */
+.form-message.error {
+    background-color: #f8d7da !important;
+    color: #842029 !important;
+    border: 1px solid #f5c2c7 !important;
+}
+
+/* Soft Green Success Box */
+.form-message.success {
+    background-color: #d1e7dd !important;
+    color: #0f5132 !important;
+    border: 1px solid #badbcc !important;
+}
+
+/* Red Outline class for inputs with errors */
+.input-box.error-input {
+    border: 2px solid #dc3545 !important;
+    border-radius: 12px !important; /* This fixes the sharp corners! (Adjust 12px if your normal boxes are slightly more/less rounded) */
+    background-color: #fff8f8 !important;
+    overflow: hidden; /* Ensures the inner input background doesn't poke out of the rounded corners */
+}
+
+/* Make sure the inner input's background blends cleanly with the error background */
+.input-box.error-input input {
+    background-color: transparent !important;
+}
