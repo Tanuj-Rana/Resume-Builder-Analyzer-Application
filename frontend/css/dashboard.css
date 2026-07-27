@@ -1395,3 +1395,416 @@
         grid-template-columns: 1fr;
       }
     }
+    /* ----------------------------------
+   PART 4: TEMPLATES & JD MATCH STYLES
+---------------------------------- */
+
+    .part4-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 24px;
+      margin-bottom: 40px;
+    }
+
+    .part4-card {
+      background-color: #ffffff;
+      border: 1px solid #f1f5f9;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .part4-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .part4-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .part4-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .part4-browse-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: #2563eb;
+      text-decoration: none !important;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .part4-browse-link:hover {
+      text-decoration: none !important;
+      color: #1d4ed8;
+    }
+
+    /* 1. HORIZONTALLY SCROLLABLE RESUME TEMPLATES */
+    .part4-scroll-x-container {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Horizontal Scrollbar */
+    .part4-scroll-x-container::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .part4-scroll-x-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+
+    .part4-scroll-x-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    .part4-template-item {
+      flex: 0 0 150px;
+      /* Maintains fixed width in flexbox */
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .part4-template-frame {
+      height: 200px;
+      border-radius: 16px;
+      background-color: #ffffff;
+      position: relative;
+      padding: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .part4-template-item:hover .part4-template-frame {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Template Colors */
+    .border-blue {
+      border: 4px solid #2563eb;
+    }
+
+    .border-green {
+      border: 4px solid #10b981;
+    }
+
+    .border-purple {
+      border: 4px solid #a855f7;
+    }
+
+    .border-brown {
+      border: 4px solid #d97706;
+    }
+
+    .border-crimson {
+      border: 4px solid #e11d48;
+    }
+
+    .part4-free-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #10b981;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .part4-lock-circle {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background-color: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d97706;
+      font-size: 11px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .part4-template-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .part4-line {
+      height: 4px;
+      background-color: #f1f5f9;
+      border-radius: 2px;
+    }
+
+    .part4-line.header {
+      height: 8px;
+      width: 60%;
+      border-radius: 3px;
+    }
+
+    .part4-line.header.blue {
+      background-color: #2563eb;
+    }
+
+    .part4-line.header.green {
+      background-color: #10b981;
+    }
+
+    .part4-line.header.purple {
+      background-color: #a855f7;
+    }
+
+    .part4-line.header.brown {
+      background-color: #d97706;
+    }
+
+    .part4-line.header.crimson {
+      background-color: #e11d48;
+    }
+
+    .part4-line.subheader {
+      width: 80%;
+      background-color: #1e293b;
+      height: 6px;
+    }
+
+    .part4-line.body {
+      width: 100%;
+    }
+
+    .part4-line.body.short {
+      width: 75%;
+    }
+
+    .part4-template-info {
+      margin-top: 8px;
+    }
+
+    .part4-item-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .part4-item-sub {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* 2. JD MATCH SECTION */
+    .part4-jd-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .part4-jd-header {
+      margin-bottom: 4px;
+    }
+
+    .part4-jd-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .part4-jd-icon {
+      color: #2563eb;
+      font-size: 15px;
+    }
+
+    .part4-ai-badge {
+      background-color: #eff6ff;
+      color: #2563eb;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .part4-jd-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 20px;
+    }
+
+    .part4-panel-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 14px;
+    }
+
+    /* Vertically Scrollable Resume List */
+    .part4-scroll-y-container {
+      max-height: 260px;
+      /* Maintains structure, prevents page expansion */
+      overflow-y: auto;
+      padding-right: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .part4-scroll-y-container::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .part4-scroll-y-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+
+    .part4-scroll-y-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    .part4-resume-option {
+      border: 1.5px solid #f1f5f9;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: #ffffff;
+    }
+
+    .part4-resume-option:hover {
+      border-color: #cbd5e1;
+    }
+
+    .part4-resume-option.active {
+      border-color: #2563eb;
+      background-color: #f8fafc;
+    }
+
+    .part4-option-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .part4-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .part4-avatar.blue {
+      background-color: #6366f1;
+    }
+
+    .part4-avatar.green {
+      background-color: #10b981;
+    }
+
+    .part4-avatar.purple {
+      background-color: #a855f7;
+    }
+
+    .part4-avatar.orange {
+      background-color: #f59e0b;
+    }
+
+    .part4-check-icon {
+      color: #2563eb;
+      font-size: 16px;
+    }
+
+    /* Paste JD Card & Textarea */
+    .part4-paste-jd-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .part4-jd-textarea {
+      width: 100%;
+      height: 180px;
+      background-color: #f8fafc;
+      border: 1px solid #f1f5f9;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 12.5px;
+      color: #1e293b;
+      resize: none;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .part4-jd-textarea:focus {
+      border-color: #cbd5e1;
+      background-color: #ffffff;
+    }
+
+    .part4-jd-textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    .part4-analyse-btn {
+      margin-top: 14px;
+      width: 100%;
+      background-color: #f1f5f9;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none !important;
+    }
+
+    .part4-analyse-btn:hover {
+      background-color: #2563eb;
+      color: #ffffff;
+      text-decoration: none !important;
+    }
+
+    /* Responsive Grid adjustment */
+    @media (max-width: 900px) {
+      .part4-jd-grid {
+        grid-template-columns: 1fr;
+      }
+    }
