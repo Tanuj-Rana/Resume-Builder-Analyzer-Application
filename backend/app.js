@@ -1,16 +1,27 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
-const resumeRoutes = require("./routes/resume_routes");
+const authRoutes = require('./routes/auth_routes');
+
+const resumeRoutes = require('./routes/resume_routes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors()); 
 
-app.use("/", resumeRoutes);
+app.use(express.json()); 
 
-const PORT = 3000;
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'Server is running normally' });
+});
+
+app.use('/api/auth', authRoutes); 
+
+app.use('/', resumeRoutes);
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`🚀 ResumeAI Backend running on http://localhost:${PORT}`);
 });
