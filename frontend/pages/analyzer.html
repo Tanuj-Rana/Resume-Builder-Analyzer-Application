@@ -208,9 +208,9 @@
         <div id="dropzone" class="dropzone border-2 border-dashed border-slate-300 rounded-3xl bg-white px-6 py-12 text-center transition-colors cursor-pointer">
           <div class="w-14 h-14 mx-auto rounded-2xl bg-orange-100 flex items-center justify-center text-2xl mb-4">☁️</div>
           <p class="text-lg font-bold text-slate-800">Drag and drop a file here</p>
-          <p class="text-sm text-slate-400 mt-1">Files we can read: DOC, DOCX, PDF, HTML, RTF, TXT · max 5MB</p>
+          <p class="text-sm text-slate-400 mt-1">Files we can read: PDF, DOCX, TXT · max 10MB</p>
           <button id="upload-btn" class="mt-5 bg-slate-100 hover:bg-slate-200 transition text-slate-800 font-semibold text-sm rounded-full px-6 py-2.5">Upload Your Resume</button>
-          <input type="file" id="file-input" class="hidden" accept=".doc,.docx,.pdf,.html,.rtf,.txt" />
+          <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,.txt" />
           <p class="mt-4 text-xs text-slate-400">
             <a href="#" id="paste-link" class="text-teal-600 font-semibold underline underline-offset-2">Or paste resume text</a>
           </p>
@@ -227,68 +227,245 @@
         </div>
       </section>
 
-        <!-- PART 5: Templates & JD Match -->
-         <section id="results-section" class="hidden space-y-8 fade-up"></section>
-         <!-- PART 6 : -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div class="md:col-span-1 rounded-2xl bg-white border border-slate-100 shadow-sm p-6 flex flex-col items-center justify-center">
-            <svg width="140" height="140" viewBox="0 0 140 140" class="-rotate-90">
-              <circle cx="70" cy="70" r="60" stroke="#e2e8f0" stroke-width="12" fill="none" />
-              <circle id="score-ring" cx="70" cy="70" r="60" stroke="#0d9488" stroke-width="12" fill="none"
-                stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="377" class="ring-progress" />
-            </svg>
-            <div class="-mt-24 text-center">
-              <p id="score-number" class="text-4xl font-extrabold text-slate-900">0%</p>
-              <p class="text-xs text-slate-400 font-medium mt-1">ATS Score</p>
-            </div>
-            <div class="mt-24 flex items-center gap-1 text-emerald-600 text-xs font-semibold bg-emerald-50 rounded-full px-3 py-1">
-              ↑ 12 pts since last scan
-            </div>
-          </div>
+        <!-- PART 5: ATS RESULTS -->
+<section id="results-section" class="hidden space-y-8 fade-up">
 
-          <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
-              <div class="flex items-center justify-between mb-3">
-                <p class="text-sm font-semibold text-slate-700">Content</p>
-                <span class="text-xs font-bold text-teal-600">82%</span>
-              </div>
-              <div class="w-full h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full bg-teal-500" style="width:82%"></div></div>
-              <p class="text-xs text-slate-400 mt-3">Strong action verbs, minor grammar fix needed</p>
-            </div>
-            <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
-              <div class="flex items-center justify-between mb-3">
-                <p class="text-sm font-semibold text-slate-700">Key Sections</p>
-                <span class="text-xs font-bold text-amber-600">61%</span>
-              </div>
-              <div class="w-full h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full bg-amber-500" style="width:61%"></div></div>
-              <p class="text-xs text-slate-400 mt-3">Add a professional summary with 2 metrics</p>
-            </div>
-            <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
-              <div class="flex items-center justify-between mb-3">
-                <p class="text-sm font-semibold text-slate-700">Structure</p>
-                <span class="text-xs font-bold text-teal-600">76%</span>
-              </div>
-              <div class="w-full h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full bg-teal-500" style="width:76%"></div></div>
-              <p class="text-xs text-slate-400 mt-3">Formatting is ATS-friendly and well organized</p>
-            </div>
-          </div>
+  <!-- Score + category scores -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- Overall ATS score -->
+    <div class="md:col-span-1 rounded-2xl bg-white border border-slate-100 shadow-sm p-6 flex flex-col items-center justify-center">
+      <svg width="140" height="140" viewBox="0 0 140 140" class="-rotate-90">
+        <circle cx="70" cy="70" r="60" stroke="#e2e8f0" stroke-width="12" fill="none" />
+        <circle
+          id="score-ring"
+          cx="70"
+          cy="70"
+          r="60"
+          stroke="#0d9488"
+          stroke-width="12"
+          fill="none"
+          stroke-linecap="round"
+          stroke-dasharray="377"
+          stroke-dashoffset="377"
+          class="ring-progress"
+        />
+      </svg>
+
+      <div class="-mt-24 text-center">
+        <p id="score-number" class="text-4xl font-extrabold text-slate-900">0%</p>
+        <p class="text-xs text-slate-400 font-medium mt-1">ATS Score</p>
+      </div>
+
+      <div class="mt-24 flex items-center gap-1 text-emerald-600 text-xs font-semibold bg-emerald-50 rounded-full px-3 py-1">
+        AI-powered resume analysis
+      </div>
+    </div>
+
+    <!-- Category scores -->
+    <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <!-- Content -->
+      <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-sm font-semibold text-slate-700">Content</p>
+          <span id="content-score" class="text-xs font-bold text-teal-600">0%</span>
         </div>
-        <!-- AI suggestions row, matches dashboard's assistant tone -->
-        <div class="rounded-2xl bg-teal-50 border border-teal-100 p-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-lg">✨</div>
-            <div>
-              <p class="font-semibold text-slate-800 text-sm">4 AI suggestions ready to apply</p>
-              <p class="text-xs text-slate-500">Fix the lowest-scoring section first for the biggest score gain</p>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <button class="text-xs font-semibold bg-white border border-slate-200 rounded-full px-4 py-2 hover:border-teal-300 transition">Improve ATS score</button>
-            <button class="text-xs font-semibold bg-white border border-slate-200 rounded-full px-4 py-2 hover:border-teal-300 transition">Add missing keywords</button>
-          </div>
+
+        <div class="w-full h-2 rounded-full bg-slate-100">
+          <div id="content-bar" class="h-2 rounded-full bg-teal-500 transition-all duration-700" style="width:0%"></div>
         </div>
-      </section>
-      <!-- What our ATS scanner checks -->
+
+        <p id="content-feedback" class="text-xs text-slate-400 mt-3">
+          AI analysis will appear here.
+        </p>
+      </div>
+
+      <!-- Key Sections -->
+      <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-sm font-semibold text-slate-700">Key Sections</p>
+          <span id="section-score" class="text-xs font-bold text-amber-600">0%</span>
+        </div>
+
+        <div class="w-full h-2 rounded-full bg-slate-100">
+          <div id="section-bar" class="h-2 rounded-full bg-amber-500 transition-all duration-700" style="width:0%"></div>
+        </div>
+
+        <p id="section-feedback" class="text-xs text-slate-400 mt-3">
+          AI analysis will appear here.
+        </p>
+      </div>
+
+      <!-- Structure -->
+      <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-sm font-semibold text-slate-700">Structure</p>
+          <span id="structure-score" class="text-xs font-bold text-teal-600">0%</span>
+        </div>
+
+        <div class="w-full h-2 rounded-full bg-slate-100">
+          <div id="structure-bar" class="h-2 rounded-full bg-teal-500 transition-all duration-700" style="width:0%"></div>
+        </div>
+
+        <p id="structure-feedback" class="text-xs text-slate-400 mt-3">
+          AI analysis will appear here.
+        </p>
+      </div>
+
+      <!-- Keywords -->
+      <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-sm font-semibold text-slate-700">Keywords</p>
+          <span id="keyword-score" class="text-xs font-bold text-teal-600">0%</span>
+        </div>
+
+        <div class="w-full h-2 rounded-full bg-slate-100">
+          <div id="keyword-bar" class="h-2 rounded-full bg-teal-500 transition-all duration-700" style="width:0%"></div>
+        </div>
+
+        <p class="text-xs text-slate-400 mt-3">
+          Keyword compatibility detected by AI.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI Summary -->
+  <div class="rounded-2xl bg-gradient-to-br from-teal-50 to-white border border-teal-100 p-6">
+
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-lg shadow-sm">
+        ✨
+      </div>
+
+      <div>
+        <h3 class="font-bold text-slate-900">AI Resume Summary</h3>
+        <p class="text-xs text-slate-400">Gemini's overall assessment</p>
+      </div>
+    </div>
+
+    <p id="ai-summary" class="text-sm leading-7 text-slate-600">
+      Your AI-generated resume assessment will appear here.
+    </p>
+  </div>
+
+  <!-- Strengths + Weaknesses -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+    <!-- Strengths -->
+    <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-6">
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
+          <i class="fa-solid fa-check text-emerald-600"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900">Resume Strengths</h3>
+          <p class="text-xs text-slate-400">What your resume is doing well</p>
+        </div>
+      </div>
+
+      <ul id="strengths-list" class="space-y-3"></ul>
+
+    </div>
+
+    <!-- Weaknesses -->
+    <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-6">
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+          <i class="fa-solid fa-triangle-exclamation text-red-500"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900">Areas to Improve</h3>
+          <p class="text-xs text-slate-400">Issues detected by ATS analysis</p>
+        </div>
+      </div>
+
+      <ul id="weaknesses-list" class="space-y-3"></ul>
+
+    </div>
+
+  </div>
+
+  <!-- Missing Keywords -->
+  <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-6">
+
+    <div class="flex items-center gap-3 mb-4">
+
+      <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+        <i class="fa-solid fa-key text-amber-600"></i>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-slate-900">Missing Keywords</h3>
+        <p class="text-xs text-slate-400">
+          Keywords that could improve ATS compatibility
+        </p>
+      </div>
+
+    </div>
+
+    <div id="keywords-list" class="flex flex-wrap gap-2"></div>
+
+  </div>
+
+  <!-- AI Suggestions -->
+  <div class="rounded-2xl bg-teal-50 border border-teal-100 p-5">
+
+    <div class="flex items-start gap-3">
+
+      <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-lg shadow-sm">
+        ✨
+      </div>
+
+      <div class="flex-1">
+
+        <p id="suggestions-title" class="font-semibold text-slate-800 text-sm">
+          AI suggestions
+        </p>
+
+        <p id="suggestions-subtitle" class="text-xs text-slate-500 mt-1">
+          Suggestions from your resume analysis.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div id="suggestions-list" class="mt-5 space-y-3"></div>
+
+  </div>
+
+  <!-- Detected Skills -->
+  <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-6">
+
+    <div class="flex items-center gap-3 mb-4">
+
+      <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center">
+        <i class="fa-solid fa-code text-sky-600"></i>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-slate-900">Detected Skills</h3>
+        <p class="text-xs text-slate-400">
+          Skills identified from your resume
+        </p>
+      </div>
+
+    </div>
+
+    <div id="skills-list" class="flex flex-wrap gap-2"></div>
+
+  </div>
+
+</section>
+
+<!-- What our ATS scanner checks -->
       <section class="max-w-5xl mx-auto w-full pt-4">
         <h3 class="text-xl font-bold text-slate-900 text-center">What Our ATS Scanner Checks</h3>
         <p class="text-sm text-slate-500 text-center max-w-xl mx-auto mt-2">Every scan reviews these categories and gives you actionable fixes for recruiter and ATS readability.</p>
@@ -377,45 +554,613 @@
   </main>
 
   <script>
-  const dropzone = document.getElementById('dropzone');
-  const fileInput = document.getElementById('file-input');
-  const uploadBtn = document.getElementById('upload-btn');
-  const pasteLink = document.getElementById('paste-link');
+const API_URL = "http://localhost:3000/api/analyzer/analyze";
 
-  const uploadSection = document.getElementById('upload-section');
-  const scanningSection = document.getElementById('scanning-section');
-  const resultsSection = document.getElementById('results-section');
+const dropzone = document.getElementById("dropzone");
+const fileInput = document.getElementById("file-input");
+const uploadBtn = document.getElementById("upload-btn");
 
-  const scoreRing = document.getElementById('score-ring');
-  const scoreNumber = document.getElementById('score-number');
+const uploadSection = document.getElementById("upload-section");
+const scanningSection = document.getElementById("scanning-section");
+const resultsSection = document.getElementById("results-section");
 
-  function setStep(step){
-    document.querySelectorAll('.step-dot').forEach((dot, i) => {
-      const n = i + 1;
-      if (n <= step) {
-        dot.classList.remove('bg-slate-200','text-slate-500');
-        dot.classList.add('bg-teal-600','text-white');
-      }
+const scoreRing = document.getElementById("score-ring");
+const scoreNumber = document.getElementById("score-number");
+
+
+// ========================================
+// STEP INDICATOR
+// ========================================
+
+function setStep(step) {
+  document.querySelectorAll(".step-dot").forEach((dot, index) => {
+    const currentStep = index + 1;
+
+    if (currentStep <= step) {
+      dot.classList.remove("bg-slate-200", "text-slate-500");
+      dot.classList.add("bg-teal-600", "text-white");
+    } else {
+      dot.classList.remove("bg-teal-600", "text-white");
+      dot.classList.add("bg-slate-200", "text-slate-500");
+    }
+  });
+
+  document.getElementById("line-1-2")
+    .classList.toggle("bg-teal-500", step >= 2);
+
+  document.getElementById("line-2-3")
+    .classList.toggle("bg-teal-500", step >= 3);
+}
+
+
+// ========================================
+// FILE PICKER
+// ========================================
+
+uploadBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  fileInput.click();
+});
+
+dropzone.addEventListener("click", () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener("change", () => {
+  if (fileInput.files.length > 0) {
+    analyzeResume(fileInput.files[0]);
+  }
+});
+
+
+// ========================================
+// DRAG AND DROP
+// ========================================
+
+dropzone.addEventListener("dragover", (event) => {
+  event.preventDefault();
+
+  dropzone.classList.add(
+    "border-teal-500",
+    "bg-teal-50"
+  );
+});
+
+dropzone.addEventListener("dragleave", () => {
+  dropzone.classList.remove(
+    "border-teal-500",
+    "bg-teal-50"
+  );
+});
+
+dropzone.addEventListener("drop", (event) => {
+  event.preventDefault();
+
+  dropzone.classList.remove(
+    "border-teal-500",
+    "bg-teal-50"
+  );
+
+  const files = event.dataTransfer.files;
+
+  if (files.length > 0) {
+    analyzeResume(files[0]);
+  }
+});
+
+
+// ========================================
+// MAIN ANALYZER
+// ========================================
+
+async function analyzeResume(file) {
+
+  console.log("Selected file:", file.name);
+
+  // Backend currently supports PDF, DOCX and TXT.
+  const allowedExtensions = [".pdf", ".docx", ".txt"];
+
+  const fileName = file.name.toLowerCase();
+
+  const isAllowed = allowedExtensions.some(
+    extension => fileName.endsWith(extension)
+  );
+
+  if (!isAllowed) {
+    alert("Please upload a PDF, DOCX or TXT resume.");
+    return;
+  }
+
+  // Backend multer limit = 10 MB.
+  if (file.size > 10 * 1024 * 1024) {
+    alert("Resume must be smaller than 10 MB.");
+    return;
+  }
+
+  // Show scanning screen.
+  setStep(2);
+
+  uploadSection.classList.add("hidden");
+  scanningSection.classList.remove("hidden");
+
+  const scanningText =
+    scanningSection.querySelector("p.font-semibold");
+
+  if (scanningText) {
+    scanningText.textContent =
+      `Scanning ${file.name}…`;
+  }
+
+  try {
+
+    // Create multipart/form-data.
+    const formData = new FormData();
+
+    // IMPORTANT:
+    // "resume" must match upload.single("resume")
+    // in analyzer_routes.js.
+    formData.append("resume", file);
+
+    console.log("Sending resume to:", API_URL);
+
+    // Send resume to Express backend.
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: formData
     });
-    document.getElementById('line-1-2').classList.toggle('bg-teal-500', step >= 2);
-    document.getElementById('line-2-3').classList.toggle('bg-teal-500', step >= 3);
+
+    console.log("Backend HTTP status:", response.status);
+
+    const result = await response.json();
+
+    console.log("Backend response:", result);
+
+    // Handle backend errors.
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.details ||
+        result.error ||
+        "Unable to analyze resume."
+      );
+    }
+
+    // Backend returns:
+    // {
+    //   success: true,
+    //   data: {...AI analysis...}
+    // }
+    const data = result.data;
+
+    console.log("ATS data:", data);
+
+    // Put real AI values into the UI.
+    displayATSResults(data);
+
+    // Show result section.
+    scanningSection.classList.add("hidden");
+    resultsSection.classList.remove("hidden");
+
+    setStep(3);
+
+    // Scroll to results.
+    resultsSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  } catch (error) {
+
+    console.error("ATS ANALYSIS ERROR:", error);
+
+    scanningSection.classList.add("hidden");
+    uploadSection.classList.remove("hidden");
+
+    setStep(1);
+
+    alert(
+      "Unable to analyze resume.\n\n" +
+      error.message
+    );
+  }
+}
+
+
+// ========================================
+// DISPLAY ATS RESULTS
+// ========================================
+
+function displayATSResults(data) {
+
+  // Overall score
+  const overallScore =
+    Number(data.overallScore) || 0;
+
+  scoreNumber.textContent =
+    `${overallScore}%`;
+
+  const circumference = 377;
+
+  const offset =
+    circumference -
+    (overallScore / 100) * circumference;
+
+  scoreRing.style.strokeDashoffset =
+    offset;
+
+
+  // Category scores
+  updateScore(
+    "content-score",
+    "content-bar",
+    data.contentScore
+  );
+
+  updateScore(
+    "section-score",
+    "section-bar",
+    data.sectionScore
+  );
+
+  updateScore(
+    "structure-score",
+    "structure-bar",
+    data.structureScore
+  );
+
+  updateScore(
+    "keyword-score",
+    "keyword-bar",
+    data.keywordScore
+  );
+
+
+  // AI summary
+  const summary =
+    document.getElementById("ai-summary");
+
+  if (summary) {
+    summary.textContent =
+      data.summary ||
+      "No AI summary was returned.";
   }
 
-  function runScan(){
-    setStep(2);
-    uploadSection.classList.add('hidden');
-    scanningSection.classList.remove('hidden');
 
-    setTimeout(() => {
-      scanningSection.classList.add('hidden');
-      resultsSection.classList.remove('hidden');
-      setStep(3);
-    }, 1600);
+  // Strengths
+  renderList(
+    "strengths-list",
+    data.strengths,
+    "strength"
+  );
+
+
+  // Weaknesses
+  renderList(
+    "weaknesses-list",
+    data.weaknesses,
+    "weakness"
+  );
+
+
+  // Missing keywords
+  renderKeywords(
+    data.missingKeywords
+  );
+
+
+  // Detected skills
+  renderSkills(
+    data.detectedSkills
+  );
+
+
+  // Suggestions
+  renderSuggestions(
+    data.suggestions
+  );
+}
+
+
+// ========================================
+// SCORE CARD
+// ========================================
+
+function updateScore(scoreId, barId, value) {
+
+  const score =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(value) || 0
+      )
+    );
+
+  const scoreElement =
+    document.getElementById(scoreId);
+
+  const barElement =
+    document.getElementById(barId);
+
+  if (scoreElement) {
+    scoreElement.textContent =
+      `${score}%`;
   }
 
-  uploadBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
-  dropzone.addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', () => { if (fileInput.files.length) runScan(); });
+  if (barElement) {
+    barElement.style.width =
+      `${score}%`;
+  }
+}
+
+
+// ========================================
+// STRENGTHS / WEAKNESSES
+// ========================================
+
+function renderList(
+  elementId,
+  items,
+  type
+) {
+
+  const container =
+    document.getElementById(elementId);
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (!Array.isArray(items) || items.length === 0) {
+
+    container.innerHTML = `
+      <li class="text-sm text-slate-400">
+        Nothing detected.
+      </li>
+    `;
+
+    return;
+  }
+
+  items.forEach(item => {
+
+    const li =
+      document.createElement("li");
+
+    li.className =
+      "flex gap-3 items-start text-sm text-slate-600";
+
+    const iconClass =
+      type === "strength"
+        ? "fa-circle-check text-emerald-500"
+        : "fa-circle-exclamation text-red-500";
+
+    const icon =
+      document.createElement("span");
+
+    icon.className = "mt-1";
+
+    icon.innerHTML =
+      `<i class="fa-solid ${iconClass}"></i>`;
+
+    const text =
+      document.createElement("span");
+
+    text.textContent = item;
+
+    li.appendChild(icon);
+    li.appendChild(text);
+
+    container.appendChild(li);
+  });
+}
+
+
+// ========================================
+// MISSING KEYWORDS
+// ========================================
+
+function renderKeywords(keywords) {
+
+  const container =
+    document.getElementById("keywords-list");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (
+    !Array.isArray(keywords) ||
+    keywords.length === 0
+  ) {
+
+    container.innerHTML = `
+      <span class="text-sm text-emerald-600">
+        No major missing keywords detected.
+      </span>
+    `;
+
+    return;
+  }
+
+  keywords.forEach(keyword => {
+
+    const tag =
+      document.createElement("span");
+
+    tag.className =
+      "px-3 py-1.5 rounded-full " +
+      "bg-amber-50 border border-amber-200 " +
+      "text-amber-700 text-xs font-semibold";
+
+    tag.textContent = keyword;
+
+    container.appendChild(tag);
+  });
+}
+
+
+// ========================================
+// DETECTED SKILLS
+// ========================================
+
+function renderSkills(skills) {
+
+  const container =
+    document.getElementById("skills-list");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (
+    !Array.isArray(skills) ||
+    skills.length === 0
+  ) {
+
+    container.innerHTML = `
+      <span class="text-sm text-slate-400">
+        No skills detected.
+      </span>
+    `;
+
+    return;
+  }
+
+  skills.forEach(skill => {
+
+    const tag =
+      document.createElement("span");
+
+    tag.className =
+      "px-3 py-1.5 rounded-full " +
+      "bg-sky-50 border border-sky-200 " +
+      "text-sky-700 text-xs font-semibold";
+
+    tag.textContent = skill;
+
+    container.appendChild(tag);
+  });
+}
+
+
+// ========================================
+// AI SUGGESTIONS
+// ========================================
+
+function renderSuggestions(suggestions) {
+
+  const title =
+    document.getElementById(
+      "suggestions-title"
+    );
+
+  const subtitle =
+    document.getElementById(
+      "suggestions-subtitle"
+    );
+
+  const container =
+    document.getElementById(
+      "suggestions-list"
+    );
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (
+    !Array.isArray(suggestions) ||
+    suggestions.length === 0
+  ) {
+
+    if (title) {
+      title.textContent =
+        "No additional suggestions";
+    }
+
+    if (subtitle) {
+      subtitle.textContent =
+        "Your resume analysis did not return additional suggestions.";
+    }
+
+    return;
+  }
+
+  if (title) {
+    title.textContent =
+      `${suggestions.length} AI suggestions ready`;
+  }
+
+  if (subtitle) {
+    subtitle.textContent =
+      "Prioritize the high-impact recommendations first.";
+  }
+
+  suggestions.forEach(suggestion => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "rounded-xl bg-white border border-slate-200 p-4";
+
+    const priority =
+      document.createElement("span");
+
+    priority.className =
+      "inline-block text-[10px] font-bold uppercase " +
+      "tracking-wider rounded-full px-2 py-1 mb-2";
+
+    if (suggestion.priority === "high") {
+      priority.classList.add(
+        "bg-red-50",
+        "text-red-600"
+      );
+    } else if (suggestion.priority === "medium") {
+      priority.classList.add(
+        "bg-amber-50",
+        "text-amber-600"
+      );
+    } else {
+      priority.classList.add(
+        "bg-slate-100",
+        "text-slate-600"
+      );
+    }
+
+    priority.textContent =
+      suggestion.priority || "medium";
+
+    const issue =
+      document.createElement("p");
+
+    issue.className =
+      "font-semibold text-sm text-slate-800";
+
+    issue.textContent =
+      suggestion.issue || "Resume improvement";
+
+    const recommendation =
+      document.createElement("p");
+
+    recommendation.className =
+      "text-xs text-slate-500 mt-1 leading-5";
+
+    recommendation.textContent =
+      suggestion.recommendation || "";
+
+    card.appendChild(priority);
+    card.appendChild(issue);
+    card.appendChild(recommendation);
+
+    container.appendChild(card);
+  });
+}
+
+
+// Initial state
+setStep(1);
+
 </script>
 </body>
 </html>
