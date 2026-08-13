@@ -5,9 +5,6 @@ const pool = require('../config.js'); // for importing the database connection
 
 const router = express.Router();
 
-
-// 1. REGISTER ROUTE (/api/auth/register)
-
 router.post('/register', async (req, res) => {
     // Extract data sent from the frontend HTML form
     const { first_name, last_name, email, password, phone } = req.body;
@@ -23,11 +20,11 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'Email is already registered' });
         }
 
-        //2-Hash the password securely
+        // Step B: Hash the password securely
         const saltRounds = 10;
         const password_hash = await bcrypt.hash(password, saltRounds);
 
-        // 3- Insert the new user into your MySQL database
+        // Step C: Insert the new user into your MySQL database
         const query = `INSERT INTO users (first_name, last_name, email, password_hash) 
         VALUES (?, ?, ?, ?) `;
         await pool.execute(query, [first_name, last_name, email, password_hash]);
@@ -39,9 +36,6 @@ router.post('/register', async (req, res) => {
         res.status(500).json({ error: 'Database error during registration' });
     }
 });
-
-
-// 2. LOGIN ROUTE (/api/auth/login)
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
