@@ -117,7 +117,8 @@ if (loginForm) {
                 showMessage('form-message', `Welcome back, ${data.user.first_name}! Redirecting...`, 'success');
                 
                 setTimeout(() => {
-                    window.location.href = 'profile.html'; 
+                    // FIXED: Redirects to dashboard.html instead of profile.html
+                    window.location.href = 'dashboard.html'; 
                 }, 1200);
             } else {
                 showMessage('form-message', data.error || 'Invalid email or password', 'error');
