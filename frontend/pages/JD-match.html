@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResumeAI | JD Matcher</title>
+
+  <!-- FontAwesome & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', 
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              green: '#10b981',      
+              navy: '#1e3a8a',       
+              lightblue: '#0ea5e9',  
+              lightgreen: '#34d399',
+              teal: '#14b8a6' 
+            },
+            dark: {
+              bg: '#020617',
+              card: '#0f172a',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+  </script>
+
+  <style type="text/tailwindcss">
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { @apply bg-slate-300 dark:bg-slate-700 rounded-full; }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-dark-bg text-slate-900 dark:text-slate-100 flex h-screen overflow-hidden transition-colors duration-300">
+
+  <!-- Mobile Overlay -->
+  <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 hidden transition-opacity"></div>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside id="app-sidebar" class="sidebar-container bg-gradient-to-br from-[#0c4a34] to-[#0a1e3f] dark:from-[#0a1a15] dark:to-[#030806] text-slate-200 flex flex-col h-full w-64 flex-shrink-0 border-r border-white/10 z-50 shadow-xl dark:shadow-none hidden md:flex">
+    <div class="px-4 py-5 flex-shrink-0">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-8 h-8 rounded-lg bg-white text-[#0a1e3f] flex items-center justify-center font-black text-lg shadow-sm">R</div>
+        <div>
+          <h1 class="text-white font-bold text-base leading-none tracking-tight">ResumeAI</h1>
+          <p class="text-brand-lightgreen font-bold text-[8px] uppercase tracking-widest mt-1">Builder & Analyzer</p>
+        </div>
+      </div>
+      <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mt-6">Menu</p>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto custom-scrollbar px-3 space-y-1.5">
+      <a href="./dashboard.html" class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white font-bold shadow-sm transition-all border border-white/10">
+        <i class="fa-solid fa-border-all w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">Home</span>
+      </a>
+      <a href="./builder.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <i class="fa-solid fa-pen-nib w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">Resume Builder</span>
+      </a>
+      <a href="./analyzer.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <i class="fa-solid fa-chart-simple w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">ATS Analyzer</span>
+      </a>
+      <a href="./JD-match.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <i class="fa-solid fa-briefcase w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">Job Matcher</span>
+      </a>
+    </nav>
+
+    <div class="px-4 pb-4 flex-shrink-0">
+      <div class="h-px bg-white/10 my-4"></div>
+      <div class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="User" class="w-8 h-8 rounded-full border border-white/20 object-cover flex-shrink-0">
+          <span class="text-white text-sm font-semibold truncate">Sarah Mitchell</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN APPLICATION WORKSPACE -->
+  <main class="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-dark-bg transition-colors">
+    
+    <!-- Top Navbar -->
+    <header class="h-16 bg-white/80 dark:bg-dark-card/80 backdrop-blur-md border-b border-slate-200 dark:border-dark-border flex items-center justify-between px-4 sm:px-8 z-30 transition-colors shrink-0">
+      <div class="flex items-center gap-4">
+        <button id="toggle-sidebar-btn" class="w-9 h-9 rounded-md border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all md:hidden">
+          <i class="fa-solid fa-bars-staggered text-sm"></i>
+        </button>
+        <h1 class="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+          <i class="fa-solid fa-bullseye text-brand-green"></i> JD Matcher
+        </h1>
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <button id="toggle-theme-btn" class="w-9 h-9 rounded-md border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+          <i id="theme-icon" class="fa-regular fa-moon text-sm"></i>
+        </button>
+        <div class="flex items-center gap-2 border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg py-1.5 pl-1.5 pr-3 rounded-md">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" class="w-6 h-6 rounded-md object-cover">
+          <span class="text-xs font-semibold hidden sm:block">Sarah</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrollable Workspace -->
+    <div class="flex-1 overflow-y-auto p-4 sm:p-8">
+      <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- Header Banner -->
+        <section class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-900/20 text-brand-green text-[10px] font-bold rounded uppercase tracking-wider">AI Powered Comparison</span>
+              </div>
+              <h2 class="text-2xl font-black text-slate-900 dark:text-white">Job Description Matching</h2>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">Compare your resume against any target job posting to identify missing keywords and boost ATS scores.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Input Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Left: Resume Selection & Metadata -->
+          <div class="lg:col-span-5 space-y-5">
+            <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-5 shadow-sm space-y-4">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">1. Select Target Resume</h3>
+              <div id="resume-select-container" class="space-y-2">
+                <!-- Dynamically populated resume list -->
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-5 shadow-sm space-y-4">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">2. Target Job Metadata</h3>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Target Job Title</label>
+                <input id="job-title-input" type="text" placeholder="e.g. Senior Software Engineer" class="w-full border border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-bg rounded-lg p-2.5 text-xs font-medium outline-none focus:border-brand-green">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Company Name</label>
+                <input id="company-name-input" type="text" placeholder="e.g. Google / Amazon" class="w-full border border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-bg rounded-lg p-2.5 text-xs font-medium outline-none focus:border-brand-green">
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Job Description Field & Action -->
+          <div class="lg:col-span-7 flex flex-col">
+            <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-5 shadow-sm flex-1 flex flex-col">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">3. Paste Job Description</h3>
+              <textarea id="jd-textarea" rows="10" placeholder="Paste the job description, qualifications, and required skills here..." class="w-full flex-1 border border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-bg rounded-lg p-3 text-xs font-medium text-slate-800 dark:text-slate-200 outline-none focus:border-brand-green resize-none leading-relaxed mb-4"></textarea>
+              <button id="analyze-jd-btn" onclick="runJdComparison()" class="w-full bg-brand-green text-white font-bold text-xs py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors shadow-sm">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Run Match Analysis
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- RESULTS SECTION (Hidden until analysis runs) -->
+        <section id="results-section" class="hidden space-y-6">
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Score Card -->
+            <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center">
+              <div class="relative w-28 h-28 flex items-center justify-center mb-3">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                  <path class="text-slate-100 dark:text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="score-circle" class="text-brand-green transition-all duration-1000" stroke-dasharray="0, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <span id="match-score-num" class="absolute text-2xl font-black text-slate-900 dark:text-white">0%</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-900 dark:text-white">Overall JD Match Score</h4>
+              <p id="score-status-text" class="text-[11px] font-medium text-slate-500 mt-1">Analyzing alignment...</p>
+            </div>
+
+            <!-- Found Keywords -->
+            <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-5 shadow-sm flex flex-col">
+              <h4 class="text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i> Matched Keywords (<span id="matched-count">0</span>)
+              </h4>
+              <div id="matched-keywords-container" class="flex flex-wrap gap-1.5 overflow-y-auto max-h-36"></div>
+            </div>
+
+            <!-- Missing Keywords -->
+            <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-5 shadow-sm flex flex-col">
+              <h4 class="text-xs font-bold text-rose-500 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-xmark"></i> Missing Critical Keywords (<span id="missing-count">0</span>)
+              </h4>
+              <div id="missing-keywords-container" class="flex flex-wrap gap-1.5 overflow-y-auto max-h-36"></div>
+            </div>
+          </div>
+
+          <!-- Recommendations -->
+          <div class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-6 shadow-sm space-y-4">
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-lightbulb text-amber-500"></i> AI Match Recommendations
+            </h3>
+            <div id="recommendations-container" class="space-y-2 text-xs font-medium text-slate-600 dark:text-slate-300"></div>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/jd-match.js"></script>
+</body>
+</html>

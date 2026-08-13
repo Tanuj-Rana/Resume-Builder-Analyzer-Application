@@ -25,3 +25,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 ResumeAI Backend running on http://localhost:${PORT}`);
 });
+
+const aiRoutes = require('./routes/ai_routes');
+const jdMatchRoutes = require('./routes/jd_match_routes');
+
+app.use('/api/ai', aiRoutes);
+app.use('/api', jdMatchRoutes);
