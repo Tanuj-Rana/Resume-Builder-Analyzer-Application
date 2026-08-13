@@ -39,7 +39,6 @@
     }
   </script>
 
-
   <style type="text/tailwindcss">
     .action-pill {
       @apply bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-600 backdrop-blur-sm rounded-full px-3 py-1.5 text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:border-brand-green dark:hover:border-brand-green hover:text-brand-green dark:hover:text-brand-green hover:bg-white dark:hover:bg-slate-700 hover:-translate-y-0.5 hover:shadow-sm transition-all cursor-pointer;
@@ -120,20 +119,27 @@
             <h4 class="text-white dark:text-slate-900 font-bold text-sm sidebar-text">ResumeAI Pro</h4>
             <p class="text-slate-400 dark:text-slate-600 text-[11px] leading-relaxed mt-1 sidebar-text">Unlock unlimited AI generation and advanced ATS metrics.</p>
           </div>
-          <!-- Upgraded High-Contrast Solid Button -->
           <button class="mt-3 w-fit bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-md px-4 py-2 text-xs font-bold hover:opacity-90 transition-all shadow-sm sidebar-text">
             Upgrade
           </button>
         </div>
       </div>
 
-      <!-- User Profile -->
+      <!-- User Profile (Connected to Auth) -->
       <div class="flex items-center justify-between px-1">
-        <div class="flex items-center gap-3 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="User" class="w-8 h-8 rounded-full border border-white/20 object-cover flex-shrink-0">
-          <span class="text-white text-sm font-semibold truncate sidebar-text">Sarah Mitchell</span>
-        </div>
-        <button class="text-slate-400 hover:text-white transition-colors sidebar-text"><i class="fa-solid fa-arrow-right-from-bracket text-sm"></i></button>
+        <a href="./profile.html" class="flex items-center gap-3 overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+          <!-- Unified Avatar -->
+          <div class="relative w-8 h-8 rounded-full overflow-hidden bg-brand-green text-white flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            <span class="initials-display">--</span>
+            <img class="pfp-image absolute inset-0 w-full h-full object-cover hidden" src="" alt="User">
+          </div>
+          <span class="user-name-display text-white text-sm font-semibold truncate sidebar-text">Loading...</span>
+        </a>
+        
+        <!-- Active Logout Button -->
+        <button id="logout-btn" class="text-slate-400 hover:text-white transition-colors sidebar-text cursor-pointer" title="Log out">
+          <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+        </button>
       </div>
     </div>
   </aside>
@@ -155,15 +161,17 @@
         <button id="toggle-theme-btn" class="w-9 h-9 rounded-md border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
           <i id="theme-icon" class="fa-regular fa-moon text-sm"></i>
         </button>
-        <button class="w-9 h-9 rounded-md border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 relative transition-all">
-          <i class="fa-regular fa-bell text-sm"></i>
-          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-dark-bg"></span>
-        </button>
-        <div class="flex items-center gap-2 border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg py-1.5 pl-1.5 pr-3 rounded-md cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Profile" class="w-6 h-6 rounded-md object-cover">
-          <a class="text-xs font-semibold hidden sm:block" href="./profile.html">Sarah</a>
+        
+        <!-- Profile Dropdown Button -->
+        <a href="./profile.html" class="flex items-center gap-2 border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg py-1.5 pl-1.5 pr-3 rounded-md cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+          <!-- Unified Avatar -->
+          <div class="relative w-6 h-6 rounded-md overflow-hidden bg-brand-green text-white flex items-center justify-center font-bold text-[10px] shadow-sm">
+            <span class="initials-display">--</span>
+            <img class="pfp-image absolute inset-0 w-full h-full object-cover hidden" src="" alt="Profile">
+          </div>
+          <span class="user-name-display text-xs font-semibold hidden sm:block">...</span>
           <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
-        </div>
+        </a>
       </div>
     </header>
 
@@ -524,6 +532,70 @@
       </div>
     </div>
   </main>
+
+  <!-- Added auth syncing specifically to load profile data seamlessly -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const savedLocalUser = JSON.parse(localStorage.getItem('user'));
+        
+        let fallbackUser = { name: 'Guest User', email: 'guest@local.dev' };
+        if (savedLocalUser) {
+             fallbackUser = { 
+                 name: `${savedLocalUser.first_name || ''} ${savedLocalUser.last_name || ''}`.trim(), 
+                 email: savedLocalUser.email 
+             };
+        }
+
+        // Apply data safely to UI elements
+        function applyUserData(user) {
+            const nameParts = user.name ? user.name.split(' ') : ['Guest', 'User'];
+            const firstName = nameParts[0] || 'Guest';
+            const lastName = nameParts.slice(1).join(' ') || 'User';
+
+            // Populate Text elements
+            document.querySelectorAll('.user-name-display').forEach(el => el.textContent = `${firstName} ${lastName}`);
+            
+            // Set initials
+            const initials = (firstName.charAt(0) + (lastName.charAt(0) || '')).toUpperCase();
+            document.querySelectorAll('.initials-display').forEach(el => el.textContent = initials);
+        }
+
+        function applyProfilePicture(imgUrl) {
+            document.querySelectorAll('.pfp-image').forEach(img => {
+                img.src = imgUrl;
+                img.classList.remove('hidden');
+            });
+            document.querySelectorAll('.initials-display').forEach(el => {
+                el.classList.add('hidden');
+            });
+        }
+
+        // Apply fallback instantly for speed
+        applyUserData(fallbackUser); 
+        const savedPfp = localStorage.getItem('profile_picture');
+        if (savedPfp) applyProfilePicture(savedPfp);
+
+        // Fetch fresh data if token exists
+        if (token) {
+            fetch('http://localhost:3000/api/auth/me', {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${token}` }
+            }).then(res => {
+                if (res.ok) return res.json();
+            }).then(result => {
+                if (result && result.user) applyUserData(result.user);
+            }).catch(e => console.warn("Backend unavailable, using local user data."));
+        }
+
+        // Handle Logout
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html'; 
+        });
+    });
+  </script>
 
   <script src="../js/dashboard.js"></script>
 </body>

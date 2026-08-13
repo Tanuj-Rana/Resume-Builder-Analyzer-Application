@@ -84,4 +84,76 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// ==========================================
+// NEW: GET CURRENT USER PROFILE
+// ==========================================
+router.get("/me", async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+        
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+        // Fetch user including phone and location from DB
+        const [users] = await pool.execute(
+            "SELECT user_id, first_name, last_name, email, phone, location, created_at FROM users WHERE user_id = ?",
+            [decoded.user_id]
+        );
+
+        if (users.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const dbUser = users[0];
+
+        const formattedUser = {
+            id: dbUser.user_id,
+            name: `${dbUser.first_name} ${dbUser.last_name}`,
+            first_name: dbUser.first_name,
+            last_name: dbUser.last_name,
+            email: dbUser.email,
+            phone: dbUser.phone || '',       // Send phone to frontend
+            location: dbUser.location || '', // Send location to frontend
+            created_at: dbUser.created_at
+        };
+
+        res.json({ success: true, user: formattedUser });
+
+    } catch (error) {
+        console.error("Auth error:", error);
+        res.status(401).json({ error: "Invalid or expired token" });
+    }
+});
+
 module.exports = router;
+
+
+router.put('/update', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+        
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+        const { first_name, last_name, phone, location } = req.body;
+
+        await pool.execute(
+            `UPDATE users 
+             SET first_name = ?, last_name = ?, phone = ?, location = ? 
+             WHERE user_id = ?`,
+            [first_name, last_name, phone, location, decoded.user_id]
+        );
+
+        res.json({ success: true, message: "Profile updated successfully" });
+
+    } catch (error) {
+        console.error("Update error:", error);
+        res.status(500).json({ error: "Failed to update profile in database" });
+    }
+});

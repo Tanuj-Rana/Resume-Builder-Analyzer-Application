@@ -4,7 +4,8 @@ create table users(
 	last_name Varchar(50) not null,
 	email VARCHAR(100) unique not null,
 	password_hash varchar(255) not null,
-	phone varchar(15) ,
+	phone varchar(15),
+	location varchar(255), -- ADDED LOCATION COLUMN HERE
 	created_at Datetime default CURRENT_TIMESTAMP,
 	updated_at datetime default CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
 	profile_image varchar(255)
