@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResumeAI | Profile Settings</title>
+
+  <!-- External Assets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', 
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              green: '#10b981',      
+              navy: '#1e3a8a',       
+              lightblue: '#0ea5e9',  
+              lightgreen: '#34d399',
+              teal: '#14b8a6' 
+            },
+            dark: {
+              bg: '#020617',
+              card: '#0f172a',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    .input-field {
+      @apply w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm font-medium text-slate-800 dark:text-slate-200 outline-none focus:border-brand-green focus:bg-white dark:focus:bg-dark-card transition-all;
+    }
+    .input-field[readonly] {
+      @apply opacity-70 cursor-not-allowed focus:border-slate-200 dark:focus:border-slate-700 focus:bg-slate-50 dark:focus:bg-slate-900/50;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-dark-bg text-slate-900 dark:text-slate-100 flex h-screen overflow-hidden transition-colors duration-300">
+
+  <!-- ==========================================
+       APP SIDEBAR NAVIGATION
+  =========================================== -->
+  <aside id="app-sidebar" class="sidebar-container bg-gradient-to-br from-[#0c4a34] to-[#0a1e3f] dark:from-[#0a1a15] dark:to-[#030806] text-slate-200 flex flex-col h-full w-64 flex-shrink-0 border-r border-white/10 z-50 shadow-xl dark:shadow-none">
+    
+    <!-- Sidebar Header -->
+    <div class="px-4 py-5 flex-shrink-0">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-8 h-8 rounded-lg bg-white text-[#0a1e3f] flex items-center justify-center font-black text-lg shadow-sm brand-logo">R</div>
+        <div class="sidebar-text">
+          <h1 class="text-white font-bold text-base leading-none tracking-tight">ResumeAI</h1>
+          <p class="text-brand-lightgreen font-bold text-[8px] uppercase tracking-widest mt-1">Builder & Analyzer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Links -->
+    <nav class="flex-1 overflow-y-auto custom-scrollbar px-3 space-y-1.5">
+      <a href="./dashboard.html" class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white font-bold shadow-sm transition-all border border-white/10">
+        <i class="fa-solid fa-border-all w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">Home</span>
+      </a>
+      <a href="./builder.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <i class="fa-solid fa-pen-nib w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">Resume Builder</span>
+      </a>
+      <a href="./analyzer.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <i class="fa-solid fa-chart-simple w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">ATS Analyzer</span>
+      </a>
+      <a href="./JD-match.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <i class="fa-solid fa-briefcase w-5 text-center text-sm"></i>
+        <span class="font-medium text-sm sidebar-text">Job Matcher</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer (Profile Corner 1) -->
+    <div class="px-4 pb-4 flex-shrink-0">
+      <div class="h-px bg-white/10 my-4"></div>
+      <div class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-3 overflow-hidden">
+          
+          <div class="relative w-8 h-8 rounded-full overflow-hidden bg-brand-green text-white flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            <span class="initials-display">--</span>
+            <img class="pfp-image absolute inset-0 w-full h-full object-cover hidden" src="" alt="Profile">
+          </div>
+          
+          <span class="user-name-display text-white text-sm font-semibold truncate sidebar-text">Loading...</span>
+        </div>
+        <button id="logout-btn" class="text-slate-400 hover:text-white transition-colors sidebar-text cursor-pointer">
+            <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       MAIN APPLICATION WORKSPACE
+  =========================================== -->
+  <main class="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-dark-bg transition-colors">
+    
+    <!-- Top Header Navigation (Profile Corner 2) -->
+    <header id="top-navbar" class="h-16 bg-white/80 dark:bg-dark-card/80 backdrop-blur-md border-b border-slate-200 dark:border-dark-border flex items-center justify-between px-4 sm:px-8 z-30 transition-colors">
+      <div class="flex items-center gap-4">
+        <h2 class="font-black text-lg text-slate-800 dark:text-white">Account Settings</h2>
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 border border-slate-200 dark:border-dark-border bg-white dark:bg-dark-bg py-1.5 pl-1.5 pr-3 rounded-md shadow-sm">
+          
+          <div class="relative w-6 h-6 rounded-md overflow-hidden bg-brand-green text-white flex items-center justify-center font-bold text-[10px]">
+            <span class="initials-display">--</span>
+            <img class="pfp-image absolute inset-0 w-full h-full object-cover hidden" src="" alt="Profile">
+          </div>
+
+          <span class="user-name-display text-xs font-semibold hidden sm:block">...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrollable Content Area -->
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-8">
+      <div class="max-w-5xl mx-auto space-y-6">
+        
+        <!-- Profile Header & Picture Upload (Profile Corner 3) -->
+        <section class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center gap-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-emerald-100 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/10 z-0"></div>
+          
+          <!-- Interactive Upload Container -->
+          <div class="relative z-10 group cursor-pointer" onclick="document.getElementById('pfp-upload').click()">
+            
+            <div class="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white dark:border-dark-card shadow-md bg-brand-green text-white flex items-center justify-center font-bold text-3xl">
+                <span class="initials-display">--</span>
+                <img class="pfp-image absolute inset-0 w-full h-full object-cover hidden" src="" alt="Profile">
+                
+                <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    <i class="fa-solid fa-camera text-white text-xl"></i>
+                </div>
+            </div>
+
+            <input type="file" id="pfp-upload" accept="image/*" class="hidden">
+          </div>
+
+          <div class="z-10 text-center sm:text-left">
+            <h2 class="user-name-display text-2xl font-black text-slate-900 dark:text-white">Loading...</h2>
+            <p class="user-email-display text-sm font-medium text-slate-500 mt-1">...</p>
+            <div class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide bg-brand-green/10 text-brand-green px-2.5 py-1 rounded-full mt-3">
+              <i class="fa-solid fa-circle-check"></i> Account Active
+            </div>
+          </div>
+        </section>
+
+        <!-- Form Success/Error Message Anchor -->
+        <div id="profile-message" class="hidden rounded-lg p-3 text-sm font-bold text-center"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          
+          <!-- LEFT COLUMN: Forms -->
+          <div class="lg:col-span-2 space-y-6">
+            
+            <!-- Personal Information -->
+            <section class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-6 shadow-sm">
+              <h3 class="text-base font-black text-slate-900 dark:text-white mb-5"><i class="fa-regular fa-id-badge text-brand-green mr-2"></i>Personal Information</h3>
+              
+              <form id="profile-details-form" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">First Name</label>
+                  <input type="text" id="first-name-input" class="input-field" placeholder="First Name" required>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">Last Name</label>
+                  <input type="text" id="last-name-input" class="input-field" placeholder="Last Name" required>
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">Email Address (Read-only)</label>
+                  <input type="email" id="email-input" class="input-field" value="loading..." readonly>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">Phone Number</label>
+                  <input type="tel" id="phone-input" class="input-field" placeholder="+91 98765 43210">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">Location</label>
+                  <input type="text" id="location-input" class="input-field" placeholder="Bengaluru, India">
+                </div>
+                
+                <div class="sm:col-span-2 mt-2 flex justify-end">
+                  <button type="submit" id="save-profile-btn" class="bg-brand-green text-white font-bold text-xs px-6 py-2.5 rounded-lg shadow-sm hover:bg-emerald-600 transition-colors">
+                      Save Changes
+                  </button>
+                </div>
+              </form>
+            </section>
+
+            <!-- Security & Password (OTP Flow) -->
+            <section class="bg-white dark:bg-dark-card border border-slate-200 dark:border-dark-border rounded-xl p-6 shadow-sm">
+              <h3 class="text-base font-black text-slate-900 dark:text-white mb-5"><i class="fa-solid fa-shield-halved text-brand-green mr-2"></i>Security</h3>
+              
+              <div id="password-flow-start" class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg">
+                <div>
+                  <p class="text-sm font-bold text-slate-900 dark:text-white">Account Password</p>
+                  <p class="text-[11px] font-medium text-slate-500 mt-0.5">Secure your account using an OTP sent to your email.</p>
+                </div>
+                <button id="btn-request-otp" class="border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-bold text-xs px-4 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Change</button>
+              </div>
+
+              <!-- Hidden OTP Input Area -->
+              <div id="otp-flow-area" class="hidden mt-4 p-4 border border-brand-green bg-emerald-50/30 dark:bg-emerald-900/10 rounded-lg space-y-4">
+                <p class="text-xs font-bold text-brand-green"><i class="fa-solid fa-envelope mr-1"></i> We've sent a 6-digit code to your email.</p>
+                
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">Enter OTP Code</label>
+                  <input type="text" class="input-field tracking-widest text-center text-lg" placeholder="· · · · · ·" maxlength="6">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1.5">New Password</label>
+                  <input type="password" class="input-field" placeholder="Create a strong password">
+                </div>
+                
+                <div class="flex justify-end gap-3 pt-2">
+                  <button id="btn-cancel-otp" class="text-xs font-bold text-slate-500 hover:text-slate-800 dark:hover:text-white">Cancel</button>
+                  <button class="bg-brand-green text-white font-bold text-xs px-6 py-2 rounded-md shadow-sm hover:bg-emerald-600 transition-colors">Verify & Update</button>
+                </div>
+              </div>
+
+            </section>
+          </div>
+
+          <!-- RIGHT COLUMN: Subscription -->
+          <div class="space-y-6">
+            
+            <!-- Plan Status Card -->
+            <section class="bg-gradient-to-b from-[#050b14] to-[#0a1e3f] dark:from-[#050b14] dark:to-[#020617] border border-slate-800 rounded-xl p-6 shadow-xl relative overflow-hidden">
+              <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-green/20 blur-[40px] rounded-full pointer-events-none"></div>
+              
+              <h3 class="text-sm font-black text-white mb-1">Current Plan</h3>
+              <div class="flex items-center gap-2 mb-4">
+                <span id="plan-badge" class="bg-slate-700/50 text-slate-300 border border-slate-600 text-xs font-bold px-2.5 py-0.5 rounded-full">Free Tier</span>
+              </div>
+              
+              <ul class="space-y-2 mb-6">
+                <li class="text-[11px] font-medium text-slate-400 flex items-center gap-2"><i class="fa-solid fa-check text-brand-green"></i> 3 Resume Generations</li>
+                <li class="text-[11px] font-medium text-slate-400 flex items-center gap-2"><i class="fa-solid fa-check text-brand-green"></i> Basic ATS Scoring</li>
+                <li class="text-[11px] font-medium text-slate-400 flex items-center gap-2"><i class="fa-solid fa-check text-brand-green"></i> Standard Templates</li>
+                <li class="text-[11px] font-medium text-slate-600 flex items-center gap-2"><i class="fa-solid fa-lock"></i> Unlimited AI Rewrites</li>
+                <li class="text-[11px] font-medium text-slate-600 flex items-center gap-2"><i class="fa-solid fa-lock"></i> Premium Cover Letters</li>
+              </ul>
+              
+              <button class="w-full bg-brand-green text-white font-black text-xs py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-emerald-500 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                <i class="fa-solid fa-bolt"></i> Upgrade to Premium
+              </button>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- JavaScript for Backend DB Connection & UI Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('token');
+        const msgBox = document.getElementById('profile-message');
+
+        function showMessage(message, isSuccess = true) {
+            msgBox.textContent = message;
+            msgBox.className = `block rounded-lg p-3 text-sm font-bold text-center ${isSuccess ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-rose-50 text-rose-600 border border-rose-200'}`;
+            msgBox.classList.remove('hidden');
+            setTimeout(() => msgBox.classList.add('hidden'), 5000);
+        }
+
+        // Helper to apply user data to the UI
+function applyUserData(user) {
+            const firstName = user.first_name || (user.name ? user.name.split(' ')[0] : 'Guest');
+            const lastName = user.last_name || (user.name ? user.name.split(' ').slice(1).join(' ') : 'User');
+
+            // Populate DOM Text
+            document.querySelectorAll('.user-name-display').forEach(el => el.textContent = `${firstName} ${lastName}`);
+            document.querySelectorAll('.user-email-display').forEach(el => el.textContent = user.email || 'Not logged in');
+            
+            // Populate Input Fields
+            document.getElementById('first-name-input').value = firstName;
+            document.getElementById('last-name-input').value = lastName;
+            document.getElementById('email-input').value = user.email || '';
+            document.getElementById('phone-input').value = user.phone || '';     // <--- Populates Phone
+            document.getElementById('location-input').value = user.location || ''; // <--- Populates Location
+            
+            // Set initials
+            const initials = (firstName.charAt(0) + (lastName.charAt(0) || '')).toUpperCase();
+            document.querySelectorAll('.initials-display').forEach(el => el.textContent = initials);
+        }
+
+        // --- 1. Load User Data ---
+        // SMART FALLBACK: Try to get the user data saved during login first!
+        const savedLocalUser = JSON.parse(localStorage.getItem('user'));
+        
+        let fallbackUser = { name: 'Guest User', email: 'guest@local.dev' };
+        if (savedLocalUser) {
+             fallbackUser = { 
+                 name: `${savedLocalUser.first_name || ''} ${savedLocalUser.last_name || ''}`.trim(), 
+                 email: savedLocalUser.email 
+             };
+        }
+
+        if (!token) {
+            applyUserData(fallbackUser);
+        } else {
+            // Optimistically load local data instantly so there is no delay
+            applyUserData(fallbackUser); 
+            
+            try {
+                // Then try to fetch fresh data from backend
+                const response = await fetch('http://localhost:3000/api/auth/me', {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    applyUserData(result.user);
+                }
+            } catch (error) {
+                console.warn("Backend /me route unavailable, relying on LocalStorage data.");
+            }
+        }
+
+        // --- 2. Update Profile Picture ---
+        function applyProfilePicture(imgUrl) {
+            document.querySelectorAll('.pfp-image').forEach(img => {
+                img.src = imgUrl;
+                img.classList.remove('hidden');
+            });
+            document.querySelectorAll('.initials-display').forEach(el => {
+                el.classList.add('hidden');
+            });
+        }
+
+        const savedPfp = localStorage.getItem('profile_picture');
+        if (savedPfp) applyProfilePicture(savedPfp);
+
+        document.getElementById('pfp-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imgUrl = event.target.result;
+                    applyProfilePicture(imgUrl);
+                    localStorage.setItem('profile_picture', imgUrl);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // --- 3. Save Form Changes back to Database ---
+        document.getElementById('profile-details-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = document.getElementById('save-profile-btn');
+            btn.textContent = "Saving...";
+            
+            const payload = {
+                first_name: document.getElementById('first-name-input').value,
+                last_name: document.getElementById('last-name-input').value,
+                phone: document.getElementById('phone-input').value,
+                location: document.getElementById('location-input').value
+            };
+
+            // Instantly update UI across the dashboard
+            applyUserData({ 
+                name: `${payload.first_name} ${payload.last_name}`, 
+                email: document.getElementById('email-input').value,
+                phone: payload.phone,
+                location: payload.location
+            });
+
+            // Send actual update to Database
+            if (token) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/auth/update', {
+                        method: 'PUT',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}` 
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        showMessage("Profile securely saved to Database!");
+                    } else {
+                        showMessage("Failed to save to Database. Updating locally instead.", false);
+                    }
+                } catch (error) {
+                    console.error("DB Save Error:", error);
+                    showMessage("Server disconnected. Updating locally instead.", false);
+                }
+            } else {
+                showMessage("Profile updated locally (Guest Mode).");
+            }
+
+            btn.textContent = "Save Changes";
+        });
+
+        // --- 4. OTP Flow ---
+        const btnRequestOtp = document.getElementById('btn-request-otp');
+        const btnCancelOtp = document.getElementById('btn-cancel-otp');
+        const otpArea = document.getElementById('otp-flow-area');
+
+        btnRequestOtp.addEventListener('click', () => {
+            otpArea.classList.remove('hidden');
+            btnRequestOtp.disabled = true;
+            btnRequestOtp.textContent = "OTP Sent";
+            btnRequestOtp.classList.add('opacity-50', 'cursor-not-allowed');
+        });
+
+        btnCancelOtp.addEventListener('click', () => {
+            otpArea.classList.add('hidden');
+            btnRequestOtp.disabled = false;
+            btnRequestOtp.textContent = "Change";
+            btnRequestOtp.classList.remove('opacity-50', 'cursor-not-allowed');
+        });
+
+        // --- 5. Logout ---
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html'; 
+        });
+    });
+  </script>
+</body>
+</html>
