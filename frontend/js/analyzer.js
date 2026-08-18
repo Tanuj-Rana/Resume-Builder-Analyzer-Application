@@ -2,32 +2,55 @@
 // RESUME AI - ATS ANALYZER
 // ==========================================
 
+
+// ==========================================
+// DOM ELEMENTS
+// ==========================================
+console.log("ANALYZER WORKING");
 const dropzone = document.getElementById("dropzone");
 const fileInput = document.getElementById("file-input");
 const uploadBtn = document.getElementById("upload-btn");
 
 const uploadSection = document.getElementById("upload-section");
 const scanningSection = document.getElementById("scanning-section");
-
-const scoreRing = document.getElementById("score-ring");
-const scoreNumber = document.getElementById("score-number");
+const resultsSection = document.getElementById("results-section");
 
 
 // ==========================================
 // SCORE ELEMENTS
 // ==========================================
 
-const contentScore = document.getElementById("content-score");
-const contentBar = document.getElementById("content-bar");
-const contentFeedback = document.getElementById("content-feedback");
+const scoreRing = document.getElementById("score-ring");
+const scoreNumber = document.getElementById("score-number");
 
-const sectionScore = document.getElementById("section-score");
-const sectionBar = document.getElementById("section-bar");
-const sectionFeedback = document.getElementById("section-feedback");
+const contentScore =
+    document.getElementById("content-score");
 
-const structureScore = document.getElementById("structure-score");
-const structureBar = document.getElementById("structure-bar");
-const structureFeedback = document.getElementById("structure-feedback");
+const contentBar =
+    document.getElementById("content-bar");
+
+const contentFeedback =
+    document.getElementById("content-feedback");
+
+
+const sectionScore =
+    document.getElementById("section-score");
+
+const sectionBar =
+    document.getElementById("section-bar");
+
+const sectionFeedback =
+    document.getElementById("section-feedback");
+
+
+const structureScore =
+    document.getElementById("structure-score");
+
+const structureBar =
+    document.getElementById("structure-bar");
+
+const structureFeedback =
+    document.getElementById("structure-feedback");
 
 
 // ==========================================
@@ -51,32 +74,56 @@ const suggestionsSubtitle =
 
 
 // ==========================================
+// BACKEND URL
+// ==========================================
+
+const ANALYZER_API =
+    "http://localhost:3000/api/analyzer/analyze";
+
+
+// ==========================================
 // STEPPER
 // ==========================================
 
 function setStep(step) {
 
-    document
-        .querySelectorAll(".step-dot")
-        .forEach((dot, index) => {
+    const dots =
+        document.querySelectorAll(".step-dot");
 
-            const number = index + 1;
 
-            if (number <= step) {
+    dots.forEach((dot, index) => {
 
-                dot.classList.remove(
-                    "bg-slate-200",
-                    "text-slate-500"
-                );
+        const number = index + 1;
 
-                dot.classList.add(
-                    "bg-teal-600",
-                    "text-white"
-                );
 
-            }
+        if (number <= step) {
 
-        });
+            dot.classList.remove(
+                "bg-slate-200",
+                "text-slate-500"
+            );
+
+            dot.classList.add(
+                "bg-teal-600",
+                "text-white"
+            );
+
+        }
+        else {
+
+            dot.classList.remove(
+                "bg-teal-600",
+                "text-white"
+            );
+
+            dot.classList.add(
+                "bg-slate-200",
+                "text-slate-500"
+            );
+
+        }
+
+    });
 
 
     const line12 =
@@ -109,66 +156,180 @@ function setStep(step) {
 
 
 // ==========================================
-// FILE SELECTION
+// FILE UPLOAD BUTTON
 // ==========================================
 
-uploadBtn.addEventListener(
-    "click",
-    function (event) {
+if (uploadBtn && fileInput) {
 
-        event.stopPropagation();
+    uploadBtn.addEventListener(
+        "click",
+        function (event) {
 
-        fileInput.click();
+            event.stopPropagation();
 
-    }
-);
+            fileInput.click();
 
+        }
+    );
 
-dropzone.addEventListener(
-    "click",
-    function () {
-
-        fileInput.click();
-
-    }
-);
+}
 
 
-fileInput.addEventListener(
-    "change",
-    function () {
+// ==========================================
+// DROPZONE CLICK
+// ==========================================
 
-        if (fileInput.files.length > 0) {
+if (dropzone && fileInput) {
 
-            analyzeResume(
-                fileInput.files[0]
+    dropzone.addEventListener(
+        "click",
+        function () {
+
+            fileInput.click();
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// FILE SELECTED
+// ==========================================
+
+if (fileInput) {
+
+    fileInput.addEventListener(
+        "change",
+        function () {
+
+            if (fileInput.files.length > 0) {
+
+                const file =
+                    fileInput.files[0];
+
+                console.log(
+                    "📄 Selected file:",
+                    file.name
+                );
+
+                analyzeResume(file);
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// DRAG & DROP
+// ==========================================
+
+if (dropzone) {
+
+    dropzone.addEventListener(
+        "dragover",
+        function (event) {
+
+            event.preventDefault();
+
+            dropzone.classList.add(
+                "border-teal-500"
             );
 
         }
+    );
 
-    }
-);
+
+    dropzone.addEventListener(
+        "dragleave",
+        function () {
+
+            dropzone.classList.remove(
+                "border-teal-500"
+            );
+
+        }
+    );
+
+
+    dropzone.addEventListener(
+        "drop",
+        function (event) {
+
+            event.preventDefault();
+
+            dropzone.classList.remove(
+                "border-teal-500"
+            );
+
+
+            const files =
+                event.dataTransfer.files;
+
+
+            if (
+                files &&
+                files.length > 0
+            ) {
+
+                const file =
+                    files[0];
+
+                analyzeResume(file);
+
+            }
+
+        }
+    );
+
+}
 
 
 // ==========================================
-// MAIN ATS FUNCTION
+// MAIN ATS ANALYSIS FUNCTION
 // ==========================================
 
 async function analyzeResume(file) {
 
     console.log(
-        "📤 Sending resume to ATS backend..."
+        "=========================================="
+    );
+
+    console.log(
+        "📤 Starting ATS analysis..."
+    );
+
+    console.log(
+        "File:",
+        file.name
+    );
+
+    console.log(
+        "Type:",
+        file.type
+    );
+
+    console.log(
+        "Size:",
+        file.size
     );
 
 
-    // ------------------------------------------
-    // Validate file
-    // ------------------------------------------
+    // ==========================================
+    // VALIDATE FILE
+    // ==========================================
 
     const allowedTypes = [
+
         "application/pdf",
+
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+
         "text/plain"
+
     ];
 
 
@@ -183,34 +344,64 @@ async function analyzeResume(file) {
     }
 
 
-    // ------------------------------------------
-    // Show scanning UI
-    // ------------------------------------------
+    // ==========================================
+    // SHOW SCANNING UI
+    // ==========================================
 
-    setStep(2);
+    if (uploadSection) {
 
-    uploadSection.classList.add("hidden");
-
-    scanningSection.classList.remove("hidden");
-
-
-    const scanningText =
-        scanningSection.querySelector("p.mt-4");
-
-    if (scanningText) {
-
-        scanningText.textContent =
-            `Scanning ${file.name}…`;
+        uploadSection.classList.add(
+            "hidden"
+        );
 
     }
 
 
-    // ------------------------------------------
-    // Create FormData
-    // ------------------------------------------
+    if (resultsSection) {
+
+        resultsSection.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    if (scanningSection) {
+
+        scanningSection.classList.remove(
+            "hidden"
+        );
+
+
+        const scanningText =
+            scanningSection.querySelector(
+                "p.mt-4"
+            );
+
+
+        if (scanningText) {
+
+            scanningText.textContent =
+                `Scanning ${file.name}…`;
+
+        }
+
+    }
+
+
+    setStep(2);
+
+
+    // ==========================================
+    // CREATE FORMDATA
+    // ==========================================
 
     const formData =
         new FormData();
+
+
+    // IMPORTANT:
+    // This MUST match multer's upload.single("resume")
 
     formData.append(
         "resume",
@@ -218,15 +409,47 @@ async function analyzeResume(file) {
     );
 
 
+    console.log(
+        "📦 FormData created"
+    );
+
+
+    // ==========================================
+    // VERIFY FORMDATA
+    // ==========================================
+
+    for (
+        const [key, value]
+        of formData.entries()
+    ) {
+
+        console.log(
+            "FormData:",
+            key,
+            value
+        );
+
+    }
+
+
     try {
 
-        // --------------------------------------
+        // ==========================================
         // CALL BACKEND
-        // --------------------------------------
+        // ==========================================
+
+        console.log(
+            "🌐 Calling backend:"
+        );
+
+        console.log(
+            ANALYZER_API
+        );
+
 
         const response =
             await fetch(
-                "http://localhost:3000/api/analyzer/analyze",
+                ANALYZER_API,
                 {
                     method: "POST",
                     body: formData
@@ -234,29 +457,113 @@ async function analyzeResume(file) {
             );
 
 
+        // ==========================================
+        // LOG RESPONSE INFORMATION
+        // ==========================================
+
         console.log(
-            "Backend status:",
+            "📡 Backend status:",
             response.status
         );
 
+        console.log(
+            "📡 Backend status text:",
+            response.statusText
+        );
 
-        // --------------------------------------
-        // Parse response
-        // --------------------------------------
+        console.log(
+            "📡 Content-Type:",
+            response.headers.get(
+                "content-type"
+            )
+        );
 
-        const result =
-            await response.json();
+
+        // ==========================================
+        // READ RESPONSE AS TEXT
+        // ==========================================
+
+        /*
+         * IMPORTANT:
+         *
+         * We read text first instead of directly
+         * using response.json().
+         *
+         * This prevents:
+         *
+         * Unexpected token '<'
+         *
+         * when Express returns an HTML error page.
+         */
+
+        const rawResponse =
+            await response.text();
 
 
         console.log(
-            "ATS backend result:",
+            "📥 RAW BACKEND RESPONSE:"
+        );
+
+        console.log(
+            rawResponse
+        );
+
+
+        // ==========================================
+        // PARSE JSON
+        // ==========================================
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(
+                    rawResponse
+                );
+
+        }
+        catch (jsonError) {
+
+            console.error(
+                "❌ Backend did not return JSON."
+            );
+
+
+            console.error(
+                "Raw response:",
+                rawResponse
+            );
+
+
+            throw new Error(
+                "Backend returned an invalid response.\n\n" +
+                "HTTP Status: " +
+                response.status +
+                "\n\n" +
+                "Response:\n" +
+                rawResponse.substring(
+                    0,
+                    500
+                )
+            );
+
+        }
+
+
+        console.log(
+            "✅ Parsed backend response:"
+        );
+
+        console.log(
             result
         );
 
 
-        // --------------------------------------
-        // Check backend error
-        // --------------------------------------
+        // ==========================================
+        // CHECK BACKEND ERROR
+        // ==========================================
 
         if (
             !response.ok ||
@@ -272,78 +579,207 @@ async function analyzeResume(file) {
         }
 
 
-        // --------------------------------------
-        // Get ATS data
-        // --------------------------------------
+        // ==========================================
+        // GET ATS DATA
+        // ==========================================
 
         const atsData =
             result.data;
-        const resultsSection = document.getElementById("results-section");
-        resultsSection.classList.remove("hidden");
+
+
+        if (!atsData) {
+
+            throw new Error(
+                "Backend returned no ATS analysis data."
+            );
+
+        }
+
+
+        console.log(
+            "=========================================="
+        );
+
+        console.log(
+            "🎯 ATS ANALYSIS RESULT"
+        );
 
         console.log(
             "Overall Score:",
             atsData.overallScore
         );
 
+        console.log(
+            "Content Score:",
+            atsData.contentScore
+        );
 
-        // --------------------------------------
-        // Save data
-        // --------------------------------------
+        console.log(
+            "Section Score:",
+            atsData.sectionScore
+        );
 
-        localStorage.setItem(
-            "atsAnalysis",
-            JSON.stringify(atsData)
+        console.log(
+            "Structure Score:",
+            atsData.structureScore
+        );
+
+        console.log(
+            "Keyword Score:",
+            atsData.keywordScore
+        );
+
+        console.log(
+            "Strengths:",
+            atsData.strengths
+        );
+
+        console.log(
+            "Weaknesses:",
+            atsData.weaknesses
+        );
+
+        console.log(
+            "Missing Keywords:",
+            atsData.missingKeywords
+        );
+
+        console.log(
+            "Detected Skills:",
+            atsData.detectedSkills
+        );
+
+        console.log(
+            "Suggestions:",
+            atsData.suggestions
         );
 
 
-        // --------------------------------------
-        // Update UI
-        // --------------------------------------
+        // ==========================================
+        // SAVE ATS RESULT
+        // ==========================================
+
+        localStorage.setItem(
+            "atsAnalysis",
+            JSON.stringify(
+                atsData
+            )
+        );
+
+
+        console.log(
+            "💾 ATS result saved to localStorage"
+        );
+
+
+        // ==========================================
+        // UPDATE UI
+        // ==========================================
 
         updateATSResults(
             atsData
         );
 
 
-        // --------------------------------------
-        // Hide scanning
-        // --------------------------------------
+        // ==========================================
+        // SHOW RESULTS
+        // ==========================================
 
-        scanningSection.classList.add(
-            "hidden"
-        );
+        if (resultsSection) {
 
+            resultsSection.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        // ==========================================
+        // HIDE SCANNING
+        // ==========================================
+
+        if (scanningSection) {
+
+            scanningSection.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        // ==========================================
+        // STEP 3
+        // ==========================================
 
         setStep(3);
 
 
         console.log(
-            "✅ ATS analysis completed!"
+            "✅ ATS analysis completed successfully!"
+        );
+
+        console.log(
+            "=========================================="
         );
 
     }
 
+
     catch (error) {
 
         console.error(
-            "❌ ATS Analysis Error:",
+            "=========================================="
+        );
+
+        console.error(
+            "❌ ATS ANALYSIS ERROR"
+        );
+
+        console.error(
             error
         );
 
-
-        scanningSection.classList.add(
-            "hidden"
+        console.error(
+            "=========================================="
         );
 
 
-        uploadSection.classList.remove(
-            "hidden"
-        );
+        // ==========================================
+        // HIDE SCANNING
+        // ==========================================
 
+        if (scanningSection) {
+
+            scanningSection.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        // ==========================================
+        // SHOW UPLOAD AGAIN
+        // ==========================================
+
+        if (uploadSection) {
+
+            uploadSection.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        // ==========================================
+        // RESET STEPPER
+        // ==========================================
 
         setStep(1);
 
+
+        // ==========================================
+        // SHOW ERROR
+        // ==========================================
 
         alert(
             "Unable to analyze resume.\n\n" +
@@ -362,257 +798,382 @@ async function analyzeResume(file) {
 function updateATSResults(data) {
 
     console.log(
-        "Updating ATS UI...",
-        data
+        "📊 Updating ATS UI..."
     );
 
 
-    // ========================================
+    // ==========================================
     // OVERALL SCORE
-    // ========================================
+    // ==========================================
 
     const overall =
-        Number(data.overallScore) || 0;
+        Number(
+            data.overallScore
+        ) || 0;
 
 
-    scoreNumber.textContent =
-        `${overall}%`;
+    if (scoreNumber) {
+
+        scoreNumber.textContent =
+            `${overall}%`;
+
+    }
 
 
-    // Circle circumference = 377
+    // Circle circumference
     const circumference = 377;
 
 
     const offset =
         circumference -
-        (overall / 100) *
+        (
+            overall / 100
+        ) *
         circumference;
 
 
-    scoreRing.style.strokeDashoffset =
-        offset;
+    if (scoreRing) {
+
+        scoreRing.style.strokeDashoffset =
+            offset;
+
+    }
 
 
-    // ========================================
+    // ==========================================
     // CONTENT SCORE
-    // ========================================
+    // ==========================================
 
     const content =
-        Number(data.contentScore) || 0;
+        Number(
+            data.contentScore
+        ) || 0;
 
 
-    contentScore.textContent =
-        `${content}%`;
+    if (contentScore) {
+
+        contentScore.textContent =
+            `${content}%`;
+
+    }
 
 
-    contentBar.style.width =
-        `${content}%`;
+    if (contentBar) {
+
+        contentBar.style.width =
+            `${content}%`;
+
+    }
 
 
-    contentFeedback.textContent =
-        getScoreMessage(content);
+    if (contentFeedback) {
+
+        contentFeedback.textContent =
+            getScoreMessage(
+                content
+            );
+
+    }
 
 
-    // ========================================
+    // ==========================================
     // SECTION SCORE
-    // ========================================
+    // ==========================================
 
     const sections =
-        Number(data.sectionScore) || 0;
+        Number(
+            data.sectionScore
+        ) || 0;
 
 
-    sectionScore.textContent =
-        `${sections}%`;
+    if (sectionScore) {
+
+        sectionScore.textContent =
+            `${sections}%`;
+
+    }
 
 
-    sectionBar.style.width =
-        `${sections}%`;
+    if (sectionBar) {
+
+        sectionBar.style.width =
+            `${sections}%`;
+
+    }
 
 
-    sectionFeedback.textContent =
-        getScoreMessage(sections);
+    if (sectionFeedback) {
+
+        sectionFeedback.textContent =
+            getScoreMessage(
+                sections
+            );
+
+    }
 
 
-    // ========================================
+    // ==========================================
     // STRUCTURE SCORE
-    // ========================================
+    // ==========================================
 
     const structure =
-        Number(data.structureScore) || 0;
+        Number(
+            data.structureScore
+        ) || 0;
 
 
-    structureScore.textContent =
-        `${structure}%`;
+    if (structureScore) {
+
+        structureScore.textContent =
+            `${structure}%`;
+
+    }
 
 
-    structureBar.style.width =
-        `${structure}%`;
+    if (structureBar) {
+
+        structureBar.style.width =
+            `${structure}%`;
+
+    }
 
 
-    structureFeedback.textContent =
-        getScoreMessage(structure);
+    if (structureFeedback) {
+
+        structureFeedback.textContent =
+            getScoreMessage(
+                structure
+            );
+
+    }
 
 
-    // ========================================
+    // ==========================================
     // STRENGTHS
-    // ========================================
+    // ==========================================
 
-    strengthsList.innerHTML = "";
+    if (strengthsList) {
 
-
-    if (
-        Array.isArray(data.strengths) &&
-        data.strengths.length > 0
-    ) {
-
-        data.strengths.forEach(
-            function (strength) {
-
-                const li =
-                    document.createElement("li");
-
-                li.className =
-                    "flex gap-2";
+        strengthsList.innerHTML = "";
 
 
-                li.innerHTML = `
-                    <span class="text-teal-600">✓</span>
-                    <span>${escapeHTML(strength)}</span>
+        if (
+            Array.isArray(
+                data.strengths
+            ) &&
+            data.strengths.length > 0
+        ) {
+
+            data.strengths.forEach(
+                function (strength) {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    li.className =
+                        "flex gap-2";
+
+
+                    li.innerHTML = `
+                        <span class="text-teal-600">
+                            ✓
+                        </span>
+
+                        <span>
+                            ${escapeHTML(strength)}
+                        </span>
+                    `;
+
+
+                    strengthsList.appendChild(
+                        li
+                    );
+
+                }
+            );
+
+        }
+
+        else {
+
+            strengthsList.innerHTML =
+                `
+                <li>
+                    No strengths detected.
+                </li>
                 `;
 
-
-                strengthsList.appendChild(li);
-
-            }
-        );
-
-    }
-
-    else {
-
-        strengthsList.innerHTML =
-            `<li>No strengths detected.</li>`;
+        }
 
     }
 
 
-    // ========================================
+    // ==========================================
     // WEAKNESSES
-    // ========================================
+    // ==========================================
 
-    weaknessesList.innerHTML = "";
+    if (weaknessesList) {
 
-
-    if (
-        Array.isArray(data.weaknesses) &&
-        data.weaknesses.length > 0
-    ) {
-
-        data.weaknesses.forEach(
-            function (weakness) {
-
-                const li =
-                    document.createElement("li");
-
-                li.className =
-                    "flex gap-2";
+        weaknessesList.innerHTML = "";
 
 
-                li.innerHTML = `
-                    <span class="text-amber-500">!</span>
-                    <span>${escapeHTML(weakness)}</span>
+        if (
+            Array.isArray(
+                data.weaknesses
+            ) &&
+            data.weaknesses.length > 0
+        ) {
+
+            data.weaknesses.forEach(
+                function (weakness) {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    li.className =
+                        "flex gap-2";
+
+
+                    li.innerHTML = `
+                        <span class="text-amber-500">
+                            !
+                        </span>
+
+                        <span>
+                            ${escapeHTML(weakness)}
+                        </span>
+                    `;
+
+
+                    weaknessesList.appendChild(
+                        li
+                    );
+
+                }
+            );
+
+        }
+
+        else {
+
+            weaknessesList.innerHTML =
+                `
+                <li>
+                    No major weaknesses detected.
+                </li>
                 `;
 
-
-                weaknessesList.appendChild(li);
-
-            }
-        );
-
-    }
-
-    else {
-
-        weaknessesList.innerHTML =
-            `<li>No major weaknesses detected.</li>`;
+        }
 
     }
 
 
-    // ========================================
+    // ==========================================
     // MISSING KEYWORDS
-    // ========================================
+    // ==========================================
 
-    keywordsList.innerHTML = "";
+    if (keywordsList) {
 
-
-    if (
-        Array.isArray(data.missingKeywords) &&
-        data.missingKeywords.length > 0
-    ) {
-
-        data.missingKeywords.forEach(
-            function (keyword) {
-
-                const span =
-                    document.createElement("span");
+        keywordsList.innerHTML = "";
 
 
-                span.className =
-                    "px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold";
+        if (
+            Array.isArray(
+                data.missingKeywords
+            ) &&
+            data.missingKeywords.length > 0
+        ) {
+
+            data.missingKeywords.forEach(
+                function (keyword) {
+
+                    const span =
+                        document.createElement(
+                            "span"
+                        );
 
 
-                span.textContent =
-                    keyword;
+                    span.className =
+                        "px-3 py-1.5 rounded-full " +
+                        "bg-slate-100 text-slate-700 " +
+                        "text-xs font-semibold";
 
 
-                keywordsList.appendChild(span);
+                    span.textContent =
+                        keyword;
 
-            }
-        );
+
+                    keywordsList.appendChild(
+                        span
+                    );
+
+                }
+            );
+
+        }
+
+        else {
+
+            keywordsList.innerHTML =
+                `
+                <span class="text-sm text-teal-600">
+                    No major missing keywords detected.
+                </span>
+                `;
+
+        }
 
     }
 
-    else {
 
-        keywordsList.innerHTML =
-            `<span class="text-sm text-teal-600">
-                No major missing keywords detected.
-            </span>`;
-
-    }
-
-
-    // ========================================
+    // ==========================================
     // AI SUGGESTIONS
-    // ========================================
+    // ==========================================
 
     const suggestions =
-        Array.isArray(data.suggestions)
+        Array.isArray(
+            data.suggestions
+        )
             ? data.suggestions
             : [];
 
 
-    suggestionsTitle.textContent =
-        `${suggestions.length} AI suggestions ready to apply`;
+    if (suggestionsTitle) {
 
-
-    if (suggestions.length > 0) {
-
-        const firstSuggestion =
-            suggestions[0];
-
-
-        suggestionsSubtitle.textContent =
-            firstSuggestion.recommendation ||
-            "Review the recommendations below to improve your ATS score.";
+        suggestionsTitle.textContent =
+            `${suggestions.length} AI suggestions ready to apply`;
 
     }
 
-    else {
 
-        suggestionsSubtitle.textContent =
-            "Your resume looks good. Continue refining it for your target role.";
+    if (suggestionsSubtitle) {
+
+        if (
+            suggestions.length > 0
+        ) {
+
+            const firstSuggestion =
+                suggestions[0];
+
+
+            suggestionsSubtitle.textContent =
+                firstSuggestion.recommendation ||
+                "Review the recommendations below to improve your ATS score.";
+
+        }
+
+        else {
+
+            suggestionsSubtitle.textContent =
+                "Your resume looks good. Continue refining it for your target role.";
+
+        }
 
     }
 
@@ -658,11 +1219,70 @@ function getScoreMessage(score) {
 function escapeHTML(value) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     div.textContent =
-        value;
+        String(value ?? "");
+
 
     return div.innerHTML;
 
 }
+
+
+// ==========================================
+// INITIAL PAGE STATE
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        console.log(
+            "🚀 ResumeAI ATS Analyzer loaded"
+        );
+
+
+        console.log(
+            "Analyzer API:",
+            ANALYZER_API
+        );
+
+
+        // Results should be hidden
+        // until a resume is successfully analyzed.
+
+        if (resultsSection) {
+
+            resultsSection.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        if (scanningSection) {
+
+            scanningSection.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        if (uploadSection) {
+
+            uploadSection.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        setStep(1);
+
+    }
+);
